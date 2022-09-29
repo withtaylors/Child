@@ -37,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
         confidence = findViewById(R.id.confidence);
         result = findViewById(R.id.result);
         picture = findViewById(R.id.picture);
@@ -96,13 +95,15 @@ public class MainActivity extends AppCompatActivity {
             }
             String[] classes = {"happy", "sad", "surprise", "angry"};
 
+            System.out.println(confidences);
+
             result.setText(classes[maxPos]);
 
-            String s = "";
-            for(int i = 0; i < classes.length; i++){
-                s+= String.format("%s: %.1f%%\n", classes[i], confidences[i] * 100);
-            }
-            confidence.setText(s);
+//            String s = "";
+//            for(int i = 0; i < classes.length; i++){
+//                s+= String.format("%s: %.1f%%\n", classes[i], confidences[i] * 100);
+//            }
+            //confidence.setText(s);
 
             // Releases model resources if no longer used.
             model.close();
