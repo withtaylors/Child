@@ -7,6 +7,12 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -57,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
     public void classifyImage(Bitmap image){
         try {
             ModelT model = ModelT.newInstance(getApplicationContext());
@@ -95,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
             }
             String[] classes = {"happy", "sad", "surprise", "angry"};
 
-            System.out.println(confidences);
+           // System.out.println(confidences);
 
             result.setText(classes[maxPos]);
 
