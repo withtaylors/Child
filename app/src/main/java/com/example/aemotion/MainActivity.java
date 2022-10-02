@@ -4,10 +4,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -16,6 +18,7 @@ import android.graphics.RectF;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -59,10 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-
     }
+
 
     public void classifyImage(Bitmap image){
         try {
@@ -102,15 +103,9 @@ public class MainActivity extends AppCompatActivity {
             }
             String[] classes = {"happy", "sad", "surprise", "angry"};
 
-           // System.out.println(confidences);
+            System.out.println(confidences);
 
             result.setText(classes[maxPos]);
-
-//            String s = "";
-//            for(int i = 0; i < classes.length; i++){
-//                s+= String.format("%s: %.1f%%\n", classes[i], confidences[i] * 100);
-//            }
-            //confidence.setText(s);
 
             // Releases model resources if no longer used.
             model.close();
@@ -119,17 +114,39 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private Bitmap getRoundedCroppedBitmap(Bitmap image) {
+        int widthLight = image.getWidth();
+        int heightLight = image.getHeight();
+
+        Bitmap output = Bitmap.createBitmap(image.getWidth(), image.getHeight(),
+                Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(output);
+        Paint paintColor = new Paint();
+        paintColor.setFlags(Paint.ANTI_ALIAS_FLAG);
+
+        RectF rectF = new RectF(new Rect(0, 0, widthLight, heightLight));
+
+        canvas.drawRoundRect(rectF, widthLight / 2, heightLight / 2, paintColor);
+
+        Paint paintImage = new Paint();
+        paintImage.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
+        canvas.drawBitmap(image, 0, 0, paintImage);
+
+        return output;
+    }
+
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         if (requestCode == 1 && resultCode == RESULT_OK) {
             Bitmap image = (Bitmap) data.getExtras().get("data");
             int dimension = Math.min(image.getWidth(), image.getHeight());
             image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
-            imageView.setImageBitmap(image);
+            Bitmap a = getRoundedCroppedBitmap(image);
+            imageView.setImageBitmap(a);
 
             image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
             classifyImage(image);
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
