@@ -14,45 +14,45 @@
         android:layout_marginEnd="104dp"
         android:layout_marginBottom="288dp"
         android:layout_weight="1"
-        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
 
+    <Button
+        android:id="@+id/picture"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="카메라"
+        android:textSize="20sp"
+        android:fontFamily="@font/font"
+        app:layout_constraintStart_toStartOf="@+id/result"
+        app:layout_constraintTop_toTopOf="@+id/result" />
+
     <TextView
         android:id="@+id/result"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:layout_marginLeft="100dp"
-        android:text="dkdkdkdk결과겨ㅕㅕㅕㅕ"
+        android:fontFamily="@font/font"
+        android:text="Result"
         android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/confidence"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="20dp"
         android:textColor="@color/white"
         android:layout_weight="1"
-        android:text="아ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ"
+        android:text="정확도"
+        android:textSize="20sp"
         app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.213"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/picture"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="380dp"
-        android:layout_marginTop="68dp"
-        android:layout_weight="1"
-        app:layout_constraintStart_toStartOf="@+id/result"
-        app:layout_constraintTop_toTopOf="@+id/result" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:fontFamily="@font/font"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
