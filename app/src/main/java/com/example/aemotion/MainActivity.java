@@ -26,6 +26,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.aemotion.ml.ModelT;
 
@@ -47,11 +48,14 @@ public class MainActivity extends AppCompatActivity {
     final static int CROP_PICTURE = 2;
     private Uri pictureUri;
 
+    int CheckON;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        CheckON = VO.getCheckON();
 
         confidence = findViewById(R.id.confidence);
         result = findViewById(R.id.result);
@@ -123,7 +127,36 @@ public class MainActivity extends AppCompatActivity {
 
             System.out.println(confidences);
 
-            result.setText(classes[maxPos]);
+            if (CheckON == 1){
+                if(classes[maxPos] == "happy"){
+                    result.setText(classes[maxPos]);
+                }
+                else{
+                    Toast.makeText(MainActivity.this, "기쁜 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
+                    result.setText("기쁜표정아님");
+                }
+            }else if (CheckON == 2) {
+                if (classes[maxPos] == "sad") {
+                    result.setText(classes[maxPos]);
+                } else {
+                    Toast.makeText(MainActivity.this, "슬픈 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
+                    result.setText("슬픈표정아님");
+                }
+            }else if (CheckON == 3) {
+                if (classes[maxPos] == "surprise") {
+                    result.setText(classes[maxPos]);
+                } else {
+                    Toast.makeText(MainActivity.this, "놀란 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
+                    result.setText("놀란표정아님");
+                }
+            }else if (CheckON == 4) {
+                if (classes[maxPos] == "angry") {
+                    result.setText(classes[maxPos]);
+                } else {
+                    Toast.makeText(MainActivity.this, "화난 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
+                    result.setText("화난표정아님");
+                }
+            }
 
             // Releases model resources if no longer used.
             model.close();
@@ -154,22 +187,6 @@ public class MainActivity extends AppCompatActivity {
 
         return output;
     }
-
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-//        if (requestCode == 1 && resultCode == RESULT_OK) {
-//            Bitmap image = (Bitmap) data.getExtras().get("data");
-//            int dimension = Math.min(image.getWidth(), image.getHeight());
-//            image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
-//            Bitmap a = getRoundedCroppedBitmap(image);
-//            imageView.setImageBitmap(a);
-//
-//            image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
-//            classifyImage(image);
-//        }
-//        super.onActivityResult(requestCode, resultCode, data);
-//    }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
