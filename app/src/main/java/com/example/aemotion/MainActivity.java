@@ -46,7 +46,6 @@ public class MainActivity extends AppCompatActivity {
     final static int TAKE_PICTURE = 1;
     final static int CROP_PICTURE = 2;
     private Uri pictureUri;
-
     int CheckON;
 
     @Override
