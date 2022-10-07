@@ -8,18 +8,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Camera;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
-import android.media.ExifInterface;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.AttributeSet;
 import android.view.View;
@@ -44,9 +42,6 @@ public class MainActivity extends AppCompatActivity {
     int imageSize = 224;
 
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,24 +52,26 @@ public class MainActivity extends AppCompatActivity {
         picture = findViewById(R.id.picture);
         imageView = findViewById(R.id.imageView);
 
+        //Uri exposure 무시
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
 
-
-        picture.setOnClickListener(new View.OnClickListener() {
+        picture.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                     startActivityForResult(cameraIntent, 1);
-
                 } else {
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
                 }
             }
         });
+
     }
 
 
-    public void classifyImage(Bitmap image) {
+    public void classifyImage(Bitmap image){
         try {
             ModelT model = ModelT.newInstance(getApplicationContext());
 
@@ -83,11 +80,11 @@ public class MainActivity extends AppCompatActivity {
             ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3);
             byteBuffer.order(ByteOrder.nativeOrder());
 
-            int[] intValues = new int[imageSize * imageSize];
+            int [] intValues = new int[imageSize * imageSize];
             image.getPixels(intValues, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
             int pixel = 0;
-            for (int i = 0; i < imageSize; i++) {
-                for (int j = 0; j < imageSize; j++) {
+            for(int i = 0; i<imageSize; i++){
+                for(int j = 0; j <imageSize; j++){
                     int val = intValues[pixel++];
                     byteBuffer.putFloat(((val >> 16) & 0xFF) * (1.f / 255.f));
                     byteBuffer.putFloat(((val >> 8) & 0xFF) * (1.f / 255.f));
@@ -104,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
             float[] confidences = outputFeature0.getFloatArray();
             int maxPos = 0;
             float maxConfidence = 0;
-            for (int i = 0; i < confidences.length; i++) {
-                if (confidences[i] > maxConfidence) {
+            for(int i = 0; i < confidences.length; i++){
+                if(confidences[i] > maxConfidence){
                     maxConfidence = confidences[i];
                     maxPos = i;
                 }
@@ -145,10 +142,6 @@ public class MainActivity extends AppCompatActivity {
         return output;
     }
 
-
-
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
         if (requestCode == 1 && resultCode == RESULT_OK) {
@@ -158,16 +151,8 @@ public class MainActivity extends AppCompatActivity {
             Bitmap a = getRoundedCroppedBitmap(image);
             imageView.setImageBitmap(a);
 
-            Matrix sideInversion = new Matrix();
-            sideInversion.setScale(-1,1);
-
-            Bitmap sideInverionImg = Bitmap.createBitmap(image, 0,0 , image.getWidth(), image.getHeight(), sideInversion, true);
-
+            image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
             classifyImage(image);
-            imageView.setImageBitmap(sideInverionImg);
-
-
-
         }
         super.onActivityResult(requestCode, resultCode, data);
     }
