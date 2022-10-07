@@ -17,6 +17,7 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.media.ThumbnailUtils;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.AttributeSet;
 import android.view.View;
@@ -51,6 +52,10 @@ public class MainActivity extends AppCompatActivity {
         picture = findViewById(R.id.picture);
         imageView = findViewById(R.id.imageView);
 
+        //Uri exposure 무시
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+
         picture.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
@@ -62,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
 
