@@ -22,15 +22,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:srcCompat="@tools:sample/avatars" />
-    <Button
-        android:id="@+id/picture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="카메라"
-        android:textSize="20sp"
-        android:fontFamily="@font/font"
-        app:layout_constraintStart_toStartOf="@+id/result"
-        app:layout_constraintTop_toTopOf="@+id/result" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
