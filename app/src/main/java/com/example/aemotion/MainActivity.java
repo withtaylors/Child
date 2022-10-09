@@ -28,7 +28,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.aemotion.ml.ModelT;
+import com.example.aemotion.ml.Model;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
@@ -55,7 +55,6 @@ public class MainActivity extends AppCompatActivity {
 
         CheckON = VO.getCheckON();
 
-        confidence = findViewById(R.id.confidence);
         result = findViewById(R.id.result);
         picture = findViewById(R.id.picture);
         imageView = findViewById(R.id.imageView);
@@ -87,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void classifyImage(Bitmap image) {
         try {
-            ModelT model = ModelT.newInstance(getApplicationContext());
+            Model model = Model.newInstance(getApplicationContext());
 
             // Creates inputs for reference.
             TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);
@@ -109,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
             inputFeature0.loadBuffer(byteBuffer);
 
             // Runs model inference and gets result.
-            ModelT.Outputs outputs = model.process(inputFeature0);
+            Model.Outputs outputs = model.process(inputFeature0);
             TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();
 
             float[] confidences = outputFeature0.getFloatArray();
