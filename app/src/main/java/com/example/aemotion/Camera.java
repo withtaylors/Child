@@ -10,9 +10,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -25,7 +23,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
-import android.util.AttributeSet;
 import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
@@ -44,7 +41,7 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class MainActivity extends AppCompatActivity {
+public class Camera extends AppCompatActivity {
     TextView result;
     ImageView imageView;
     Button picture;
@@ -59,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_camera);
 
         CheckON = VO.getCheckON();
 
@@ -108,16 +105,16 @@ public class MainActivity extends AppCompatActivity {
                 editor.apply();
 
                 if (CheckON == 1) {
-                    Intent intent = new Intent(MainActivity.this, Happy.class);
+                    Intent intent = new Intent(Camera.this, Happy.class);
                     startActivity(intent);
                 } else if (CheckON == 2) {
-                    Intent intent = new Intent(MainActivity.this, Sad.class);
+                    Intent intent = new Intent(Camera.this, Sad.class);
                     startActivity(intent);
                 } else if (CheckON == 3) {
-                    Intent intent = new Intent(MainActivity.this, Surprised.class);
+                    Intent intent = new Intent(Camera.this, Surprised.class);
                     startActivity(intent);
                 } else {
-                    Intent intent = new Intent(MainActivity.this, Angry.class);
+                    Intent intent = new Intent(Camera.this, Angry.class);
                     startActivity(intent);
                 }
 
@@ -174,28 +171,28 @@ public class MainActivity extends AppCompatActivity {
                     result.setText(classes[maxPos]);
                 }
                 else{
-                    Toast.makeText(MainActivity.this, "기쁜 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Camera.this, "기쁜 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
                     result.setText("기쁜표정아님");
                 }
             }else if (CheckON == 2) {
                 if (classes[maxPos] == "sad") {
                     result.setText(classes[maxPos]);
                 } else {
-                    Toast.makeText(MainActivity.this, "슬픈 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Camera.this, "슬픈 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
                     result.setText("슬픈표정아님");
                 }
             }else if (CheckON == 3) {
                 if (classes[maxPos] == "surprise") {
                     result.setText(classes[maxPos]);
                 } else {
-                    Toast.makeText(MainActivity.this, "놀란 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Camera.this, "놀란 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
                     result.setText("놀란표정아님");
                 }
             }else if (CheckON == 4) {
                 if (classes[maxPos] == "angry") {
                     result.setText(classes[maxPos]);
                 } else {
-                    Toast.makeText(MainActivity.this, "화난 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(Camera.this, "화난 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
                     result.setText("화난표정아님");
                 }
             }
