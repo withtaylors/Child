@@ -4,10 +4,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -15,6 +18,7 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
+import android.graphics.drawable.BitmapDrawable;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
@@ -22,6 +26,7 @@ import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
 import android.util.AttributeSet;
+import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,26 +34,28 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.aemotion.ml.Model;
-import com.example.aemotion.ml.Model;
 
 import org.tensorflow.lite.DataType;
 import org.tensorflow.lite.support.tensorbuffer.TensorBuffer;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
 public class MainActivity extends AppCompatActivity {
-    TextView result, confidence;
+    TextView result;
     ImageView imageView;
     Button picture;
+    Button next;
     int imageSize = 224;
-    final static int TAKE_PICTURE = 1;
-    final static int CROP_PICTURE = 2;
+    final static int TAKE_PICTURE= 1;
+    final static int CROP_PICTURE= 2;
     private Uri pictureUri;
     int CheckON;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
 
         CheckON = VO.getCheckON();
 
-        confidence = findViewById(R.id.confidence);
         result = findViewById(R.id.result);
         picture = findViewById(R.id.picture);
         imageView = findViewById(R.id.imageView);
+        next = findViewById(R.id.next);
 
         //Uri exposure 무시
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
@@ -84,7 +91,43 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
+                Bitmap bitmap1 = drawable.getBitmap();
+                imageView.setImageBitmap(bitmap1);
+                ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
+                bitmap1.compress(Bitmap.CompressFormat.PNG, 70, baos1);
+                byte[] bytes1 = baos1.toByteArray();
+                String temp1 = Base64.encodeToString(bytes1, Base64.DEFAULT);
+                SharedPreferences sharedPreferences = getSharedPreferences("MY", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("image", temp1);
+                editor.apply();
+
+                if (CheckON == 1) {
+                    Intent intent = new Intent(MainActivity.this, Happy.class);
+                    startActivity(intent);
+                } else if (CheckON == 2) {
+                    Intent intent = new Intent(MainActivity.this, Sad.class);
+                    startActivity(intent);
+                } else if (CheckON == 3) {
+                    Intent intent = new Intent(MainActivity.this, Surprised.class);
+                    startActivity(intent);
+                } else {
+                    Intent intent = new Intent(MainActivity.this, Angry.class);
+                    startActivity(intent);
+                }
+
+            }
+
+
+        });
     }
+
+
 
     public void classifyImage(Bitmap image) {
         try {
@@ -160,11 +203,10 @@ public class MainActivity extends AppCompatActivity {
             // Releases model resources if no longer used.
             model.close();
         } catch (IOException e) {
-            // TODO Handle the exception
+            //TODO Handle the exception
         }
     }
 
-    //사진 동그라미 테두리로 나오게하는 코드
     private Bitmap getRoundedCroppedBitmap(Bitmap image) {
         int widthLight = image.getWidth();
         int heightLight = image.getHeight();
@@ -187,33 +229,38 @@ public class MainActivity extends AppCompatActivity {
         return output;
     }
 
+
+
+    //사진 동그라미 테두리로 나오게하는 코드
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         switch (requestCode) {
             //크롭된 이미지 가져와서 이미지뷰에 보여주기
             case TAKE_PICTURE:
-                if (resultCode == RESULT_OK || data.hasExtra("data")) { //데이터를 가지고 있는지 확인
-                    System.out.println("datain8888!!");
-                    final Bundle extras = data.getExtras();
+            if (resultCode ==RESULT_OK|| data.hasExtra("data")) { //데이터를 가지고 있는지 확인
+                System.out.println("datain8888!!");
+                final Bundle extras = data.getExtras();
 
-                    if (extras != null) {
-                        Bitmap image = extras.getParcelable("data"); //크롭한 이미지 가져오기
-                        int dimension = Math.min(image.getWidth(), image.getHeight());
-                        image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
-                        Bitmap a = getRoundedCroppedBitmap(image);
-                        imageView.setImageBitmap(a);// 크롭한 이미지 배치하기
-                        a = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
-                        classifyImage(a);
-                    }
-                    // 임시 파일 삭제
-                    File f = new File(pictureUri.getPath());
-                    if (f.exists())
-                        f.delete();
-
-                    break;
+                if (extras != null) {
+                    Bitmap image = extras.getParcelable("data"); //크롭한 이미지 가져오기
+                    int dimension = Math.min(image.getWidth(), image.getHeight());
+                    image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
+                    Bitmap a = getRoundedCroppedBitmap(image);
+                    imageView.setImageBitmap(a);// 크롭한 이미지 배치하기
+                    a = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
+                    classifyImage(a);
                 }
+                // 임시 파일 삭제
+                File f = new File(pictureUri.getPath());
+                if (f.exists())
+                    f.delete();
+
                 break;
+            }
+            break;
 
             // 이미지 크롭
             case CROP_PICTURE: {
@@ -229,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra("aspectY", 1); //크롭 박스의 y축 비율
                 intent.putExtra("scale", true);
                 intent.putExtra("return-data", true);
-                startActivityForResult(intent, TAKE_PICTURE);
+                startActivityForResult(intent,TAKE_PICTURE);
 
                 break;
             }

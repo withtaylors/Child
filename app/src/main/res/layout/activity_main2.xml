@@ -21,25 +21,29 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/one"
-            />
+            android:text="기쁨" />
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/two"/>
+            android:id="@+id/two"
+            android:text="슬픔"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        >
         <Button
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="100"
-            android:id="@+id/three"/>
+            android:id="@+id/three"
+            android:text="놀람"/>
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/four"/>
+            android:id="@+id/four"
+            android:text="화남"/>
     </LinearLayout>
 </LinearLayout>
 
