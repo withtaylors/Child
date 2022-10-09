@@ -13,7 +13,6 @@ public class MainActivity2 extends AppCompatActivity {
     Button one,two,three,four;
 
     int CheckON;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
