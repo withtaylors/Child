@@ -28,7 +28,6 @@ public class MainActivity2 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON = 1;
 
-
                 VO.setCheckON(CheckON);
                 Intent intent = new Intent(MainActivity2.this, MainActivity.class);
                 startActivity(intent);
