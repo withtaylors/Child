@@ -8,18 +8,19 @@
     tools:context=".Sad">
 
     <ImageView
-        android:id="@+id/happy"
-        android:layout_width="280dp"
-        android:layout_height="470dp"
+        android:id="@+id/sad"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="200dp" />
     <ImageView
-        android:id="@+id/imageView3"
+        android:id="@+id/sad2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height = "400dp"
         android:layout_marginTop="150dp"
-        android:background="@drawable/sad"
+        android:background="@drawable/sad_b"
         android:layout_marginBottom="100dp" />
+
     <nl.dionsegijn.konfetti.xml.KonfettiView
         android:id="@+id/konfettiView"
         android:layout_width="match_parent"
