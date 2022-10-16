@@ -12,9 +12,6 @@
         android:layout_height="match_parent" />
 
 
-
-
-
     <ImageView
         android:id="@+id/angry"
         android:layout_width="296dp"
@@ -26,6 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
-        android:background="@drawable/mad"
+        android:background="@drawable/mad_b"
         android:layout_marginBottom="100dp" />
 </FrameLayout>

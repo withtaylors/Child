@@ -47,8 +47,7 @@ public class Happy extends AppCompatActivity {
         byte[] encodeByte = Base64.decode(temp1, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
 
-        Bitmap a = getRoundedCroppedBitmap(bitmap);
-        happy.setImageBitmap(a);
+        happy.setImageBitmap(bitmap);
 
         final Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_heart);
         Shape.DrawableShape drawableShape = new Shape.DrawableShape(drawable, true);
