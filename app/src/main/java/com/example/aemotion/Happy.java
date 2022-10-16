@@ -40,15 +40,14 @@ public class Happy extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_happy);
 
-        SharedPreferences sharedPreferences = getSharedPreferences("MY", Context.MODE_PRIVATE );
+        SharedPreferences sharedPreferences = getSharedPreferences("MY", Context.MODE_PRIVATE);
         ImageView happy = findViewById(R.id.happy);
 
         String temp1 = sharedPreferences.getString("image", " ");
         byte[] encodeByte = Base64.decode(temp1, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
 
-        Bitmap a = getRoundedCroppedBitmap(bitmap);
-        happy.setImageBitmap(a);
+        happy.setImageBitmap(bitmap);
 
         final Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_heart);
         Shape.DrawableShape drawableShape = new Shape.DrawableShape(drawable, true);
@@ -65,28 +64,5 @@ public class Happy extends AppCompatActivity {
                 .position(0.0, 0.0, 1.0, 0.0)
                 .build();
         konfettiView.start(party);
-    }
-
-
-    private Bitmap getRoundedCroppedBitmap(Bitmap image) {
-        int widthLight = image.getWidth();
-        int heightLight = image.getHeight();
-
-        Bitmap output = Bitmap.createBitmap(image.getWidth(), image.getHeight(),
-                Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(output);
-        Paint paintColor = new Paint();
-        paintColor.setFlags(Paint.ANTI_ALIAS_FLAG);
-
-        RectF rectF = new RectF(new Rect(0, 0, widthLight, heightLight));
-
-        canvas.drawRoundRect(rectF, widthLight / 2, heightLight / 2, paintColor);
-
-        Paint paintImage = new Paint();
-        paintImage.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-        canvas.drawBitmap(image, 0, 0, paintImage);
-
-        return output;
     }
 }
