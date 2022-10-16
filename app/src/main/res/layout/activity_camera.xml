@@ -1,56 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Camera">
+    tools:context=".Camera"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="30dp"
+        android:orientation="vertical">
 
     <ImageView
         android:id="@+id/imageView"
+        android:layout_marginTop="40dp"
         android:layout_width="match_parent"
-        android:layout_height="350dp"
-        android:layout_marginBottom="104dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:srcCompat="@tools:sample/avatars" />
-
-    <Button
-        android:id="@+id/picture"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
-        android:text="카메라"
-        android:textSize="20sp"
-        android:fontFamily="@font/font"
-        app:layout_constraintStart_toStartOf="@+id/result"
-        app:layout_constraintTop_toTopOf="@+id/result" />
+        android:layout_height="340dp"
+        android:padding="10dp"
+        android:background="@drawable/shadow_test"/>
 
     <TextView
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
         android:fontFamily="@font/font"
         android:text=""
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintBaseline_toBaselineOf="parent"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textSize="18sp" />
+
+    <ImageButton
+        android:id="@+id/picture"
+        android:layout_gravity="center"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        app:srcCompat="@android:drawable/ic_menu_camera"
+        android:background="@drawable/camera_shadow" />
 
     <Button
         android:id="@+id/next"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="다음"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.08"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_height="40dp"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="right"
+        android:text="합성된 이미지를 확인해봐요!  >>"
+        android:fontFamily="@font/font"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:background="@drawable/gradation_btn" />
+</LinearLayout>
+</LinearLayout>

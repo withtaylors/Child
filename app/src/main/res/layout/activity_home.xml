@@ -7,12 +7,11 @@
     tools:context=".Home"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="20dp">
+        android:layout_margin="15dp">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -23,15 +22,24 @@
             android:scaleType="centerCrop"
             android:layout_margin="30dp"
             android:src="@drawable/aemotion" />
-
         </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginTop="15dp"
+            app:cardCornerRadius="30dp"
+            app:cardElevation="15dp"
+            android:background="@drawable/custom_edittext">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:orientation="vertical"
-            android:layout_marginTop="70dp"
-            android:layout_marginHorizontal="10dp">
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginVertical="50dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -42,15 +50,16 @@
                 android:textAlignment="center"
                 android:text="감정 카드를 통해 감정을 학습해봐요 "
                 android:textSize="13sp"
-                android:textColor="#ff7eb4"/>
+                android:textColor="@color/normal"/>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="1단계"
                 android:textSize="16sp"
                 android:padding="18dp"
-                android:background="@drawable/shadow_test_background"
-                android:layout_margin="10dp" />
+                android:textColor="@color/white"
+                android:background="@drawable/gradiation_btn2"
+                android:layout_margin="10dp"/>
             </LinearLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -63,16 +72,16 @@
                         android:textAlignment="center"
                         android:text="학습한 감정을 제대로 이해했는지 확인해봐요 "
                         android:textSize="13sp"
-                        android:textColor="#dc80bf"/>
+                        android:textColor="@color/normal"/>
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="2단계"
                         android:textSize="16sp"
                         android:padding="18dp"
-                        android:background="@drawable/shadow_test_background"
-                        android:layout_margin="10dp"
-                        />
+                        android:textColor="@color/white"
+                        android:background="@drawable/gradiation_btn2"
+                        android:layout_margin="10dp"/>
                 </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -85,18 +94,30 @@
                             android:textAlignment="center"
                             android:text="감정과 알맞은 표정을 지어봐요 "
                             android:textSize="13sp"
-                            android:textColor="#b86bc6"/>
+                            android:textColor="@color/normal"/>
                         <Button
                             android:id="@+id/level3"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="3단계"
+                            android:textColor="@color/white"
                             android:textSize="16sp"
                             android:padding="18dp"
-                            android:background="@drawable/shadow_test_background"
+                            android:background="@drawable/gradiation_btn2"
                             android:layout_margin="10dp"
                             />
                     </LinearLayout>
         </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ⓒ 2022. 박지연,이경원 all rights reserved."
+            android:textSize="14sp"
+            android:textAlignment="center"
+            android:id="@+id/signupText"
+            android:layout_marginTop="50dp"
+            android:textColor="#B96BC6"/>
     </LinearLayout>
 </LinearLayout>
