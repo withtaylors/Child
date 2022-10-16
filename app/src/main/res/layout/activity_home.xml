@@ -7,53 +7,96 @@
     tools:context=".Home"
     android:orientation="vertical">
 
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="vertical"
         android:layout_margin="20dp">
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
         <ImageView
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="100dp"
             android:scaleType="centerCrop"
-            android:layout_marginTop="10dp"
-            android:src="@drawable/ae" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:text="감정을 학습해볼까?"
-            android:fontFamily="@font/font"
-            android:textStyle="bold"
-            android:textSize="25sp"
-            android:textColor="#454545"
-            android:textAlignment="center"/>
+            android:layout_margin="30dp"
+            android:src="@drawable/aemotion" />
+
         </LinearLayout>
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:orientation="vertical">
-            <Button
-                android:layout_width="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="70dp"
+            android:layout_marginHorizontal="10dp">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="감정카드"
-                />
-            <Button
-                android:layout_width="wrap_content"
+                android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="감정학습"
-                />
+                android:textAlignment="center"
+                android:text="감정 카드를 통해 감정을 학습해봐요 "
+                android:textSize="13sp"
+                android:textColor="#ff7eb4"/>
             <Button
-                android:id="@+id/camera"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="표정훈련"
-                />
+                android:text="1단계"
+                android:textSize="16sp"
+                android:padding="18dp"
+                android:background="@drawable/shadow_test_background"
+                android:layout_margin="10dp" />
+            </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="10dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="학습한 감정을 제대로 이해했는지 확인해봐요 "
+                        android:textSize="13sp"
+                        android:textColor="#dc80bf"/>
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2단계"
+                        android:textSize="16sp"
+                        android:padding="18dp"
+                        android:background="@drawable/shadow_test_background"
+                        android:layout_margin="10dp"
+                        />
+                </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginTop="10dp">
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textAlignment="center"
+                            android:text="감정과 알맞은 표정을 지어봐요 "
+                            android:textSize="13sp"
+                            android:textColor="#b86bc6"/>
+                        <Button
+                            android:id="@+id/level3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="3단계"
+                            android:textSize="16sp"
+                            android:padding="18dp"
+                            android:background="@drawable/shadow_test_background"
+                            android:layout_margin="10dp"
+                            />
+                    </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

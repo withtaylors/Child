@@ -2,7 +2,6 @@ package com.example.aemotion;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -12,7 +11,6 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -29,7 +27,6 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -55,58 +52,26 @@ public class Camera extends AppCompatActivity {
     private Uri pictureUri;
     int CheckON;
 
-
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
-
-
         CheckON = VO.getCheckON();
-
-
 
         result = findViewById(R.id.result);
         picture = findViewById(R.id.picture);
         imageView = findViewById(R.id.imageView);
         next = findViewById(R.id.next);
 
-        if(CheckON == 1){
-
-            next.setVisibility(View.INVISIBLE);
-            result.setVisibility(View.INVISIBLE);
-        }
-        else if(CheckON == 2){
-
-            next.setVisibility(View.INVISIBLE);
-            result.setVisibility(View.INVISIBLE);
-        }
-        else if(CheckON == 3){
-
-            next.setVisibility(View.INVISIBLE);
-            result.setVisibility(View.INVISIBLE);
-        }
-        else{
-
-            next.setVisibility(View.INVISIBLE);
-            result.setVisibility(View.INVISIBLE);
-        }
-
-
         //Uri exposure 무시
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
-
-
+        //카메라 버튼을 누르면
         picture.setOnClickListener(new View.OnClickListener() {
-
-
             @Override
             public void onClick(View view) {
-                result.setVisibility(View.VISIBLE);
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -117,20 +82,15 @@ public class Camera extends AppCompatActivity {
                     cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, pictureUri);
                     cameraIntent.putExtra("return-data", true);
                     startActivityForResult(cameraIntent, CROP_PICTURE);
-
                 } else {
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
                 }
             }
         });
 
-
-
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //이미지 넘김
-
                 BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap1 = drawable.getBitmap();
                 imageView.setImageBitmap(bitmap1);
@@ -152,18 +112,14 @@ public class Camera extends AppCompatActivity {
                 } else if (CheckON == 3) {
                     Intent intent = new Intent(Camera.this, Surprised.class);
                     startActivity(intent);
-                } else {
+                } else if(CheckON == 4){
                     Intent intent = new Intent(Camera.this, Angry.class);
                     startActivity(intent);
                 }
-
             }
-
-
         });
+
     }
-
-
 
     public void classifyImage(Bitmap image) {
         try {
@@ -204,22 +160,18 @@ public class Camera extends AppCompatActivity {
             String[] classes = {"happy", "sad", "surprise", "angry"};
 
             System.out.println(confidences);
-            next.setVisibility(View.INVISIBLE);
 
             if (CheckON == 1){
                 if(classes[maxPos] == "happy"){
                     result.setText(classes[maxPos]);
-                    next.setVisibility(View.VISIBLE);
-
                 }
                 else{
-                    Toast.makeText(Camera.this, "기쁜 표정이 아니에요!", Toast.LENGTH_SHORT).show();
-                    result.setText("기쁜 표정을 다시 지어보세요");
+                    Toast.makeText(Camera.this, "기쁜 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
+                    result.setText("기쁜표정아님");
                 }
             }else if (CheckON == 2) {
                 if (classes[maxPos] == "sad") {
                     result.setText(classes[maxPos]);
-                    next.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(Camera.this, "슬픈 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
                     result.setText("슬픈표정아님");
@@ -227,7 +179,6 @@ public class Camera extends AppCompatActivity {
             }else if (CheckON == 3) {
                 if (classes[maxPos] == "surprise") {
                     result.setText(classes[maxPos]);
-                    next.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(Camera.this, "놀란 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
                     result.setText("놀란표정아님");
@@ -235,7 +186,6 @@ public class Camera extends AppCompatActivity {
             }else if (CheckON == 4) {
                 if (classes[maxPos] == "angry") {
                     result.setText(classes[maxPos]);
-                    next.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(Camera.this, "화난 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
                     result.setText("화난표정아님");
@@ -248,33 +198,6 @@ public class Camera extends AppCompatActivity {
             //TODO Handle the exception
         }
     }
-
-    private Bitmap getRoundedCroppedBitmap(Bitmap image) {
-        int widthLight = image.getWidth();
-        int heightLight = image.getHeight();
-
-        Bitmap output = Bitmap.createBitmap(image.getWidth(), image.getHeight(),
-                Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(output);
-        Paint paintColor = new Paint();
-        paintColor.setFlags(Paint.ANTI_ALIAS_FLAG);
-
-        RectF rectF = new RectF(new Rect(0, 0, widthLight, heightLight));
-
-        canvas.drawRoundRect(rectF, widthLight / 2, heightLight / 2, paintColor);
-
-        Paint paintImage = new Paint();
-        paintImage.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-        canvas.drawBitmap(image, 0, 0, paintImage);
-
-        return output;
-    }
-
-
-
-    //사진 동그라미 테두리로 나오게하는 코드
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -290,10 +213,9 @@ public class Camera extends AppCompatActivity {
                     Bitmap image = extras.getParcelable("data"); //크롭한 이미지 가져오기
                     int dimension = Math.min(image.getWidth(), image.getHeight());
                     image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
-                    Bitmap a = getRoundedCroppedBitmap(image);
-                    imageView.setImageBitmap(a);// 크롭한 이미지 배치하기
-                    a = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
-                    classifyImage(a);
+                    image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
+                    imageView.setImageBitmap(image);// 크롭한 이미지 배치하기
+                    classifyImage(image);
                 }
                 // 임시 파일 삭제
                 File f = new File(pictureUri.getPath());
@@ -323,6 +245,5 @@ public class Camera extends AppCompatActivity {
                 break;
             }
         }
-
     }
 }

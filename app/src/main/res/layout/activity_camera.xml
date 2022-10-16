@@ -8,10 +8,9 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="196dp"
-        android:layout_height="236dp"
-        android:layout_marginEnd="108dp"
-        android:layout_marginBottom="168dp"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:layout_marginBottom="104dp"
         android:layout_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -21,10 +20,10 @@
         android:id="@+id/picture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="568dp"
-        android:fontFamily="@font/font"
+        android:layout_marginTop="68dp"
         android:text="카메라"
         android:textSize="20sp"
+        android:fontFamily="@font/font"
         app:layout_constraintStart_toStartOf="@+id/result"
         app:layout_constraintTop_toTopOf="@+id/result" />
 
@@ -32,25 +31,25 @@
         android:id="@+id/result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
         android:fontFamily="@font/font"
-        android:text="Result"
+        android:text=""
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintBaseline_toBaselineOf="parent"
         app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/next"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="309dp"
-        android:layout_marginEnd="14dp"
-        android:layout_marginBottom="16dp"
         android:text="다음"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.08"
         app:layout_constraintStart_toStartOf="parent" />
 
 
