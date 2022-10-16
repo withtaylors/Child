@@ -23,6 +23,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="100dp"
-        android:background="@drawable/mad_b"
+        android:background="@drawable/mad"
         android:layout_marginBottom="100dp" />
 </FrameLayout>
