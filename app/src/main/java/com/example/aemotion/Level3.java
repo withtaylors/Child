@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 public class Level3 extends AppCompatActivity {
 
@@ -31,7 +30,7 @@ public class Level3 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON = 1;
                 VO.setCheckON(CheckON);
-                Intent intent = new Intent(Level3.this, happyex.class);
+                Intent intent = new Intent(Level3.this, Expic.class);
                 startActivity(intent);
             }
         });
@@ -41,7 +40,7 @@ public class Level3 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON = 2;
                 VO.setCheckON(CheckON);
-                Intent intent = new Intent(Level3.this, happyex.class);
+                Intent intent = new Intent(Level3.this, Expic.class);
                 startActivity(intent);
             }
         });
@@ -51,7 +50,7 @@ public class Level3 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON = 3;
                 VO.setCheckON(CheckON);
-                Intent intent = new Intent(Level3.this, happyex.class);
+                Intent intent = new Intent(Level3.this, Expic.class);
                 startActivity(intent);
             }
         });
@@ -61,7 +60,7 @@ public class Level3 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON = 4;
                 VO.setCheckON(CheckON);
-                Intent intent = new Intent(Level3.this, happyex.class);
+                Intent intent = new Intent(Level3.this, Expic.class);
                 startActivity(intent);
             }
         });
