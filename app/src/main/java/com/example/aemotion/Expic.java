@@ -29,7 +29,7 @@ public class Expic extends AppCompatActivity {
         out.setDuration(3000);
 
         mSwitcher.startAnimation(out);
-        mSwitcher.setText("예시표정을 따라 해 보세요!");
+        mSwitcher.setText("예시표정을 따라해보세요!");
         mSwitcher.startAnimation(in);
 
         layoutback = findViewById(R.id.layoutback);

@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.CAMERA" />
-
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAG" />
 
@@ -56,13 +55,6 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity3"
-            android:exported="true">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
             android:name=".Happy"
             android:exported="true">
             <meta-data
@@ -70,7 +62,21 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Happy"
+            android:name=".Sad"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Surprised"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Angry"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
