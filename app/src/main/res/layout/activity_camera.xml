@@ -21,10 +21,10 @@
         android:id="@+id/picture"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="68dp"
+        android:layout_marginTop="568dp"
+        android:fontFamily="@font/font"
         android:text="카메라"
         android:textSize="20sp"
-        android:fontFamily="@font/font"
         app:layout_constraintStart_toStartOf="@+id/result"
         app:layout_constraintTop_toTopOf="@+id/result" />
 
@@ -46,7 +46,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="309dp"
         android:layout_marginEnd="14dp"
-        android:layout_marginBottom="43dp"
+        android:layout_marginBottom="16dp"
         android:text="다음"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

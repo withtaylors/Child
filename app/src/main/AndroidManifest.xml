@@ -21,11 +21,19 @@
         android:theme="@style/Theme.Aemotion"
         tools:targetApi="31">
         <activity
+            android:name=".happyex"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Home"
             android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,14 +42,14 @@
         </activity>
         <activity
             android:name=".Level3"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
             android:name=".Camera"
-            android:exported="false">
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -49,7 +57,13 @@
         <activity
             android:name=".MainActivity3"
             android:exported="true">
-
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Happy"
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

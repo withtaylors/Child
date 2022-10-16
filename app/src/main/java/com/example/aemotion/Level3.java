@@ -6,10 +6,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 
 public class Level3 extends AppCompatActivity {
 
     Button happy, sad, surprised, angry;
+
 
     int CheckON;
 
@@ -23,12 +25,13 @@ public class Level3 extends AppCompatActivity {
         surprised = findViewById(R.id.surprised);
         angry = findViewById(R.id.angry);
 
+
         happy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 CheckON = 1;
                 VO.setCheckON(CheckON);
-                Intent intent = new Intent(Level3.this, Camera.class);
+                Intent intent = new Intent(Level3.this, happyex.class);
                 startActivity(intent);
             }
         });
@@ -38,7 +41,7 @@ public class Level3 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON = 2;
                 VO.setCheckON(CheckON);
-                Intent intent = new Intent(Level3.this, Camera.class);
+                Intent intent = new Intent(Level3.this, happyex.class);
                 startActivity(intent);
             }
         });
@@ -48,7 +51,7 @@ public class Level3 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON = 3;
                 VO.setCheckON(CheckON);
-                Intent intent = new Intent(Level3.this, Camera.class);
+                Intent intent = new Intent(Level3.this, happyex.class);
                 startActivity(intent);
             }
         });
@@ -58,7 +61,7 @@ public class Level3 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON = 4;
                 VO.setCheckON(CheckON);
-                Intent intent = new Intent(Level3.this, Camera.class);
+                Intent intent = new Intent(Level3.this, happyex.class);
                 startActivity(intent);
             }
         });

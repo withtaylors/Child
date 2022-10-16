@@ -2,6 +2,7 @@ package com.example.aemotion;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -11,6 +12,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
@@ -27,6 +29,7 @@ import android.util.Base64;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -52,26 +55,58 @@ public class Camera extends AppCompatActivity {
     private Uri pictureUri;
     int CheckON;
 
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
 
+
+
         CheckON = VO.getCheckON();
+
+
 
         result = findViewById(R.id.result);
         picture = findViewById(R.id.picture);
         imageView = findViewById(R.id.imageView);
         next = findViewById(R.id.next);
 
+        if(CheckON == 1){
+
+            next.setVisibility(View.INVISIBLE);
+            result.setVisibility(View.INVISIBLE);
+        }
+        else if(CheckON == 2){
+
+            next.setVisibility(View.INVISIBLE);
+            result.setVisibility(View.INVISIBLE);
+        }
+        else if(CheckON == 3){
+
+            next.setVisibility(View.INVISIBLE);
+            result.setVisibility(View.INVISIBLE);
+        }
+        else{
+
+            next.setVisibility(View.INVISIBLE);
+            result.setVisibility(View.INVISIBLE);
+        }
+
+
         //Uri exposure 무시
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
+
+
         picture.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
+                result.setVisibility(View.VISIBLE);
                 if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
                     Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
 
@@ -82,15 +117,19 @@ public class Camera extends AppCompatActivity {
                     cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, pictureUri);
                     cameraIntent.putExtra("return-data", true);
                     startActivityForResult(cameraIntent, CROP_PICTURE);
+
                 } else {
                     requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);
                 }
             }
         });
 
+
+
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //이미지 넘김
 
                 BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap1 = drawable.getBitmap();
@@ -165,18 +204,22 @@ public class Camera extends AppCompatActivity {
             String[] classes = {"happy", "sad", "surprise", "angry"};
 
             System.out.println(confidences);
+            next.setVisibility(View.INVISIBLE);
 
             if (CheckON == 1){
                 if(classes[maxPos] == "happy"){
                     result.setText(classes[maxPos]);
+                    next.setVisibility(View.VISIBLE);
+
                 }
                 else{
-                    Toast.makeText(Camera.this, "기쁜 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
-                    result.setText("기쁜표정아님");
+                    Toast.makeText(Camera.this, "기쁜 표정이 아니에요!", Toast.LENGTH_SHORT).show();
+                    result.setText("기쁜 표정을 다시 지어보세요");
                 }
             }else if (CheckON == 2) {
                 if (classes[maxPos] == "sad") {
                     result.setText(classes[maxPos]);
+                    next.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(Camera.this, "슬픈 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
                     result.setText("슬픈표정아님");
@@ -184,6 +227,7 @@ public class Camera extends AppCompatActivity {
             }else if (CheckON == 3) {
                 if (classes[maxPos] == "surprise") {
                     result.setText(classes[maxPos]);
+                    next.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(Camera.this, "놀란 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
                     result.setText("놀란표정아님");
@@ -191,6 +235,7 @@ public class Camera extends AppCompatActivity {
             }else if (CheckON == 4) {
                 if (classes[maxPos] == "angry") {
                     result.setText(classes[maxPos]);
+                    next.setVisibility(View.VISIBLE);
                 } else {
                     Toast.makeText(Camera.this, "화난 표정이 아니에요! 표정을 다시 한번 지어보세요 :)", Toast.LENGTH_SHORT).show();
                     result.setText("화난표정아님");
