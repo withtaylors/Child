@@ -11,11 +11,12 @@
         android:id="@+id/h_message"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text=""
+        android:layout_marginTop="30dp"
+        android:text="예시문구"
         android:textSize="18sp"
         android:textAlignment="center"
-        android:fontFamily="@font/font"/>
+        android:fontFamily="@font/font"
+        android:textColor="#dc80bf"/>
 
     <ImageView
         android:id="@+id/layoutback"

@@ -67,7 +67,7 @@ public class Happy extends AppCompatActivity {
         konfettiView.start(party);
     }
 
-
+    //사진 동그라미 테두리로 나오게하는 코드
     private Bitmap getRoundedCroppedBitmap(Bitmap image) {
         int widthLight = image.getWidth();
         int heightLight = image.getHeight();

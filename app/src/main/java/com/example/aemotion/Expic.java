@@ -15,9 +15,6 @@ public class Expic extends AppCompatActivity {
     int CheckON;
     ImageView layoutback;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,48 +29,24 @@ public class Expic extends AppCompatActivity {
         out.setDuration(3000);
 
         mSwitcher.startAnimation(out);
-        mSwitcher.setText("예시 표정을 따라 해 보세요!");
+        mSwitcher.setText("예시표정을 따라 해 보세요!");
         mSwitcher.startAnimation(in);
 
         layoutback = findViewById(R.id.layoutback);
 
-
-       CheckON = VO.getCheckON();
-
-
-
+        CheckON = VO.getCheckON();
         if(CheckON == 1){
             layoutback.setImageResource(R.drawable.happy);
-
         }
         else if(CheckON == 2){
-
             layoutback.setImageResource(R.drawable.sad);
-
         }
         else if(CheckON == 3){
-
             layoutback.setImageResource(R.drawable.surprised);
-                  }
+        }
         else{
             layoutback.setImageResource(R.drawable.mad);
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         new Handler().postDelayed(new Runnable() {
             @Override

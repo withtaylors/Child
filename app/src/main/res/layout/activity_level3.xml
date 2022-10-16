@@ -18,10 +18,7 @@
             android:layout_height="wrap_content"
             android:text="감정을 선택해주세요"
             android:fontFamily="@font/font"
-            android:textStyle="bold"
-            android:textSize="20sp"
-            android:textColor="@color/black"
-            />
+            android:textSize="18sp" />
     </LinearLayout>
 
     <TableLayout

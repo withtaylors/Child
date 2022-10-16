@@ -10,8 +10,6 @@ import android.widget.Button;
 public class Level3 extends AppCompatActivity {
 
     Button happy, sad, surprised, angry;
-
-
     int CheckON;
 
     @Override
@@ -30,7 +28,7 @@ public class Level3 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON = 1;
                 VO.setCheckON(CheckON);
-                Intent intent = new Intent(Level3.this, Expic.class);
+                Intent intent = new Intent(Level3.this, Camera.class);
                 startActivity(intent);
             }
         });
