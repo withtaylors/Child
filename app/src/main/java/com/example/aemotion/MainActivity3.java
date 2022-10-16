@@ -3,9 +3,15 @@ package com.example.aemotion;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.util.Base64;
+import android.widget.ImageView;
 
 import java.util.Arrays;
 import java.util.concurrent.TimeUnit;
@@ -28,6 +34,13 @@ public class MainActivity3 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("MY", Context.MODE_PRIVATE );
+        ImageView happy = findViewById(R.id.imageView2);
+
+        String temp1 = sharedPreferences.getString("image", " ");
+        byte[] encodeByte = Base64.decode(temp1, Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
+        happy.setImageBitmap(bitmap);
         final Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_heart);
         Shape.DrawableShape drawableShape = new Shape.DrawableShape(drawable, true);
 

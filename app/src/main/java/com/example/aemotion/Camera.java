@@ -52,7 +52,6 @@ public class Camera extends AppCompatActivity {
     private Uri pictureUri;
     int CheckON;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -69,6 +68,7 @@ public class Camera extends AppCompatActivity {
         StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
         StrictMode.setVmPolicy(builder.build());
 
+        //카메라 버튼을 누르면
         picture.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -91,7 +91,6 @@ public class Camera extends AppCompatActivity {
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();
                 Bitmap bitmap1 = drawable.getBitmap();
                 imageView.setImageBitmap(bitmap1);
@@ -113,18 +112,14 @@ public class Camera extends AppCompatActivity {
                 } else if (CheckON == 3) {
                     Intent intent = new Intent(Camera.this, Surprised.class);
                     startActivity(intent);
-                } else {
+                } else if(CheckON == 4){
                     Intent intent = new Intent(Camera.this, Angry.class);
                     startActivity(intent);
                 }
-
             }
-
-
         });
+
     }
-
-
 
     public void classifyImage(Bitmap image) {
         try {
@@ -204,33 +199,6 @@ public class Camera extends AppCompatActivity {
         }
     }
 
-    private Bitmap getRoundedCroppedBitmap(Bitmap image) {
-        int widthLight = image.getWidth();
-        int heightLight = image.getHeight();
-
-        Bitmap output = Bitmap.createBitmap(image.getWidth(), image.getHeight(),
-                Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(output);
-        Paint paintColor = new Paint();
-        paintColor.setFlags(Paint.ANTI_ALIAS_FLAG);
-
-        RectF rectF = new RectF(new Rect(0, 0, widthLight, heightLight));
-
-        canvas.drawRoundRect(rectF, widthLight / 2, heightLight / 2, paintColor);
-
-        Paint paintImage = new Paint();
-        paintImage.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-        canvas.drawBitmap(image, 0, 0, paintImage);
-
-        return output;
-    }
-
-
-
-    //사진 동그라미 테두리로 나오게하는 코드
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -245,10 +213,9 @@ public class Camera extends AppCompatActivity {
                     Bitmap image = extras.getParcelable("data"); //크롭한 이미지 가져오기
                     int dimension = Math.min(image.getWidth(), image.getHeight());
                     image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);
-                    Bitmap a = getRoundedCroppedBitmap(image);
-                    imageView.setImageBitmap(a);// 크롭한 이미지 배치하기
-                    a = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
-                    classifyImage(a);
+                    image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);
+                    imageView.setImageBitmap(image);// 크롭한 이미지 배치하기
+                    classifyImage(image);
                 }
                 // 임시 파일 삭제
                 File f = new File(pictureUri.getPath());
@@ -278,6 +245,5 @@ public class Camera extends AppCompatActivity {
                 break;
             }
         }
-
     }
 }

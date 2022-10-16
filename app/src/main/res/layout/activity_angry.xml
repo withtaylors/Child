@@ -7,6 +7,12 @@
     android:background="@drawable/mad"
     tools:context=".Angry">
 
+    <nl.dionsegijn.konfetti.xml.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
     <ImageView
         android:id="@+id/angry"
         android:layout_width="177dp"
