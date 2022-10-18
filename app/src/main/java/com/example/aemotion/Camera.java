@@ -25,6 +25,10 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
 import android.provider.MediaStore;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.style.ForegroundColorSpan;
 import android.util.Base64;
 import android.view.View;
 import android.view.animation.Animation;
@@ -57,6 +61,7 @@ public class Camera extends AppCompatActivity {
     final static int CROP_PICTURE= 2;
     private Uri pictureUri;
     int CheckON;
+    String str = "아니에요 :(";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +73,9 @@ public class Camera extends AppCompatActivity {
         picture = findViewById(R.id.picture);
         imageView = findViewById(R.id.imageView);
         next = findViewById(R.id.next);
+
+        SpannableStringBuilder ssb = new SpannableStringBuilder(str);
+        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#FF0000")), 0, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 
         if(CheckON == 1){
             next.setVisibility(View.INVISIBLE);
@@ -196,28 +204,28 @@ public class Camera extends AppCompatActivity {
                     next.setVisibility(View.VISIBLE);
                 }
                 else{
-                    result.setText("기쁜 표정이 아니에요 :( \n 표정을 다시 한번 지어볼까요?");
+                    result.setText("기쁜 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
                 }
             }else if (CheckON == 2) {
                 if (classes[maxPos] == "sad") {
                     result.setText("슬픈 표정을 잘 지었어요!");
                     next.setVisibility(View.VISIBLE);
                 } else {
-                    result.setText("슬픈 표정이 아니에요 :( \n 표정을 다시 한번 지어볼까요?");
+                    result.setText("슬픈 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
                 }
             }else if (CheckON == 3) {
                 if (classes[maxPos] == "surprise") {
                     result.setText("놀란 표정을 잘 지었어요!");
                     next.setVisibility(View.VISIBLE);
                 } else {
-                    result.setText("놀란 표정이 아니에요 :( \n 표정을 다시 한번 지어볼까요?");
+                    result.setText("놀란 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
                 }
             }else if (CheckON == 4) {
                 if (classes[maxPos] == "angry") {
                     result.setText("화난 표정을 잘 지었어요!");
                     next.setVisibility(View.VISIBLE);
                 } else {
-                    result.setText("화난표정이 아니에요 :( \n 표정을 다시 한번 지어볼까요?");
+                    result.setText("화난 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
                 }
             }
 
