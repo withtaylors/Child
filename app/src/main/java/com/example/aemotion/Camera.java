@@ -1,8 +1,10 @@
 package com.example.aemotion;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -11,14 +13,17 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.PixelFormat;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Bundle;
@@ -29,14 +34,23 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.style.ForegroundColorSpan;
+import android.util.AttributeSet;
 import android.util.Base64;
+import android.view.MotionEvent;
+import android.view.SurfaceHolder;
+import android.view.SurfaceView;
+import android.view.TextureView;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,31 +65,43 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-public class Camera extends AppCompatActivity {
+public class Camera extends AppCompatActivity
+{
+
     TextView result;
     ImageView imageView;
     ImageButton picture;
     Button next;
+    SurfaceView cameraSurfaceView;
     int imageSize = 224;
     final static int TAKE_PICTURE= 1;
     final static int CROP_PICTURE= 2;
     private Uri pictureUri;
     int CheckON;
-    String str = "아니에요 :(";
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
         setContentView(R.layout.activity_camera);
+
+
+
 
         CheckON = VO.getCheckON();
         result = findViewById(R.id.result);
         picture = findViewById(R.id.picture);
         imageView = findViewById(R.id.imageView);
         next = findViewById(R.id.next);
+        result = findViewById(R.id.result);
 
-        SpannableStringBuilder ssb = new SpannableStringBuilder(str);
-        ssb.setSpan(new ForegroundColorSpan(Color.parseColor("#FF0000")), 0, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+
 
         if(CheckON == 1){
             next.setVisibility(View.INVISIBLE);
@@ -165,6 +191,9 @@ public class Camera extends AppCompatActivity {
             ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3);
             byteBuffer.order(ByteOrder.nativeOrder());
 
+            Canvas canvas = new Canvas();
+
+
             int[] intValues = new int[imageSize * imageSize];
             image.getPixels(intValues, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());
             int pixel = 0;
@@ -192,11 +221,40 @@ public class Camera extends AppCompatActivity {
                     maxPos = i;
                 }
             }
+
+
+
+
+
+
+
+
+
+
             String[] classes = {"happy", "sad", "surprise", "angry"};
 
             System.out.println(confidences);
             //next.setVisibility(View.INVISIBLE);
             next.setVisibility(View.VISIBLE);
+
+
+            final SpannableStringBuilder sp1 = new SpannableStringBuilder("기쁜 표정이 아니에요:( \n 다시 한 번 지어볼까요?");
+            sp1.setSpan(new ForegroundColorSpan(Color.RED),7, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+            final SpannableStringBuilder sp2 = new SpannableStringBuilder("슬픈 표정이 아니에요:( \n 다시 한 번 지어볼까요?");
+            sp2.setSpan(new ForegroundColorSpan(Color.RED),7, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+            final SpannableStringBuilder sp3 = new SpannableStringBuilder("놀란 표정이 아니에요:( \n 다시 한 번 지어볼까요?");
+            sp3.setSpan(new ForegroundColorSpan(Color.RED),7, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+            final SpannableStringBuilder sp4 = new SpannableStringBuilder("화난 표정이 아니에요:( \n 다시 한 번 지어볼까요?");
+            sp4.setSpan(new ForegroundColorSpan(Color.RED),7, 13, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+
+
 
             if (CheckON == 1){
                 if(classes[maxPos] == "happy"){
@@ -204,28 +262,30 @@ public class Camera extends AppCompatActivity {
                     next.setVisibility(View.VISIBLE);
                 }
                 else{
-                    result.setText("기쁜 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
+                    result.setText(sp1);
                 }
             }else if (CheckON == 2) {
                 if (classes[maxPos] == "sad") {
                     result.setText("슬픈 표정을 잘 지었어요!");
                     next.setVisibility(View.VISIBLE);
                 } else {
-                    result.setText("슬픈 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
+                    next.setText(sp2);
                 }
             }else if (CheckON == 3) {
                 if (classes[maxPos] == "surprise") {
                     result.setText("놀란 표정을 잘 지었어요!");
                     next.setVisibility(View.VISIBLE);
                 } else {
-                    result.setText("놀란 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
+                    next.setText(sp3);
+
                 }
             }else if (CheckON == 4) {
                 if (classes[maxPos] == "angry") {
                     result.setText("화난 표정을 잘 지었어요!");
                     next.setVisibility(View.VISIBLE);
                 } else {
-                    result.setText("화난 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
+                    next.setText(sp4);
+
                 }
             }
 
@@ -277,6 +337,14 @@ public class Camera extends AppCompatActivity {
                 startActivityForResult(intent,TAKE_PICTURE);
                 break;
             }
+
+
+
+
         }
+
+
     }
+
+
 }

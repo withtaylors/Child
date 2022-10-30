@@ -1,8 +1,10 @@
 package com.example.aemotion;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,12 +19,13 @@ public class Level1 extends AppCompatActivity {
 
     private List<Integer> listNum = new ArrayList<>();
 
-    int[] imagesources = {R.drawable.ae, R.drawable.aemotion, R.drawable.ae, R.drawable.ae};
+    int[] imagesources = {R.drawable.happy_learn, R.drawable.happy_learn, R.drawable.happy_learn, R.drawable.happy_learn};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1);
+
 
         for (int i = 1; i < 5; i++) {
             listNum.add(i);
@@ -62,7 +65,7 @@ public class Level1 extends AppCompatActivity {
 
         for (int i = 0; i < cardText.length; i++) {
             cardText[i].setText(String.valueOf(listNum.get(i)));
-            cardText[i].setBackgroundResource(R.drawable.ae);
+            cardText[i].setBackgroundResource(R.drawable.happy_word);
             cardText[i].setTextColor(getResources().getColor(R.color.text_transparent));
             viewClickCheck[i] = false;
         }
@@ -92,7 +95,7 @@ public class Level1 extends AppCompatActivity {
                                     clickTextView.setTextColor(getResources().getColor(R.color.text_color));
                                     viewClickCheck[Integer.parseInt(clickTextView.getText().toString()) - 1] = true;
                                 } else {
-                                    clickTextView.setBackgroundResource(R.drawable.ae);
+                                    clickTextView.setBackgroundResource(R.drawable.happy_word);
                                     clickTextView.setTextColor(getResources().getColor(R.color.text_transparent));
                                     viewClickCheck[Integer.parseInt(clickTextView.getText().toString()) - 1] = false;
                                 }
@@ -103,7 +106,11 @@ public class Level1 extends AppCompatActivity {
                                         .start();
                             }
                         }).start();
+
+
             }
+
+
         };
     }
 }

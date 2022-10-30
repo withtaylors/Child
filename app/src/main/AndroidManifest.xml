@@ -35,6 +35,13 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".Level1"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".Expic"
             android:exported="true" >
             <meta-data
