@@ -102,6 +102,7 @@ public class Camera extends AppCompatActivity
 
 
 
+
         if(CheckON == 1){
             next.setVisibility(View.INVISIBLE);
             result.setVisibility(View.INVISIBLE);
