@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Level2">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg_questions"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <com.google.android.material.progressindicator.LinearProgressIndicator
+            android:id="@+id/pb_quiz_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="10"
+            android:progress="0"
+            android:indeterminate="false"
+            app:trackThickness="10dp"
+            app:trackColor="@color/light_orange"
+            app:indicatorColor="@color/medium_orange"
+            app:trackCornerRadius="15dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="25dp"
+            tools:progress="5" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/Timer"
+            android:layout_marginLeft="5dp"
+            android:text=""
+            android:textSize="24sp" />
+        <TextView
+            android:id="@+id/tv_points_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/pb_quiz_progress"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="@font/font"
+            android:text="SCORE"
+            android:textColor="#4E4E4D"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/tv_points"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_points_text"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:fontFamily="@font/font"
+            android:text="0/4"
+            android:textColor="#4E4E4D"
+            android:textSize="20sp" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="25dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_below="@+id/tv_points"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:paddingTop="10dp">
+                <TextView
+                    android:id="@+id/tv_question"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="이 인물은 무슨 감정을 느끼고 있나요?"
+                    android:gravity="center"
+                    android:fontFamily="@font/font"
+                    android:layout_marginStart="15dp"
+                    android:layout_marginEnd="15dp"
+                    android:layout_marginBottom="20dp"
+                    android:textColor="#363A43"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+                <androidx.cardview.widget.CardView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="10dp"
+                    android:layout_marginBottom="20dp"
+                    app:cardElevation="5dp">
+                    <ImageView
+                        android:id="@+id/ivShowImage"
+                        android:layout_width="150dp"
+                        android:layout_height="150dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/sad"/>
+                </androidx.cardview.widget.CardView>
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_answers"
+            android:layout_width="351dp"
+            android:layout_height="280dp"
+            android:layout_below="@+id/cv_question"
+            android:layout_centerHorizontal="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="30dp"
+            app:cardCornerRadius="25dp"
+            app:cardElevation="5dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:orientation="vertical"
+                android:paddingStart="20dp"
+                android:paddingEnd="20dp">
+                <Button
+                    android:id="@+id/option_one"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/default_option_border_bg"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/font"
+                    android:gravity="center"
+                    android:onClick="answerSelected"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    tools:background="@drawable/uncorrect_option_border_bg"
+                    tools:text="France" />
+
+                <Button
+                    android:id="@+id/option_two"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/default_option_border_bg"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/font"
+                    android:gravity="center"
+                    android:onClick="answerSelected"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    tools:background="@drawable/correct_option_border_bg"
+                    tools:text="India" />
+
+                <Button
+                    android:id="@+id/option_three"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/default_option_border_bg"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/font"
+                    android:gravity="center"
+                    android:onClick="answerSelected"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    tools:text="Lebanon" />
+
+                <Button
+                    android:id="@+id/option_four"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/default_option_border_bg"
+                    android:elevation="5dp"
+                    android:fontFamily="@font/font"
+                    android:gravity="center"
+                    android:onClick="answerSelected"
+                    android:padding="10dp"
+                    android:textColor="@color/white"
+                    android:textSize="17sp"
+                    tools:text="Iran" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <Button
+            android:id="@+id/btn_submit"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:layout_marginBottom="18dp"
+            android:background="@drawable/button_background"
+            android:elevation="10dp"
+            android:fontFamily="@font/font"
+            android:text="Submit"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:visibility="invisible"/>
+        <Button
+            android:id="@+id/nextQuestion"
+            android:layout_width="100dp"
+            android:layout_height="40dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="270dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/font"
+            android:text="다음"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+</FrameLayout>
