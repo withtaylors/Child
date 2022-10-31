@@ -17,6 +17,18 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
 
         final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
+
+        Button level1 = (Button) findViewById(R.id.level1);
+        level1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                level1.startAnimation(animation);
+
+                Intent intent = new Intent(getApplicationContext(), Level2.class);
+                startActivity(intent);
+            }
+        });
+
         Button level2 = (Button) findViewById(R.id.level2);
         level2.setOnClickListener(new View.OnClickListener() {
             @Override
