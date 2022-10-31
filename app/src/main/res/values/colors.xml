@@ -21,4 +21,9 @@
     <color name="text_transparent">#00000000</color>
 
     <color name="card_view_background">#D1E9E2</color>
+    <color name="dark_orange">#DB6400</color>
+    <color name="medium_orange">#ffa62b</color>
+    <color name="light_orange">#FFF4E3</color>
+    <color name="correct_green">#8BC34A</color>
+
 </resources>
