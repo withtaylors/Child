@@ -72,7 +72,6 @@ public class Camera extends AppCompatActivity
     ImageView imageView;
     ImageButton picture;
     Button next;
-    SurfaceView cameraSurfaceView;
     int imageSize = 224;
     final static int TAKE_PICTURE= 1;
     final static int CROP_PICTURE= 2;

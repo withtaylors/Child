@@ -10,4 +10,16 @@ public class VO {
         CheckON = checkON;
     }
 
+    static private int CheckON2;
+
+    public static int getCheckON2() {
+        return CheckON2;
+    }
+    public static void setCheckON2(int checkON2) {
+        CheckON2 = checkON2;
+    }
+
+
+
+
 }

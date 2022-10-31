@@ -2,8 +2,13 @@ package com.example.aemotion;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.OvershootInterpolator;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -13,13 +18,105 @@ import java.util.List;
 
 public class Level1 extends AppCompatActivity {
 
-    private TextView[] cardText = new TextView[4];
+    int CheckON2;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_level1);
+
+
+
+
+       /*final Animation front = AnimationUtils.loadAnimation(this, R.anim.front_animator);
+       final Animation back = AnimationUtils.loadAnimation(this,R.anim.back_animator);*/
+
+       TextView image_1 = findViewById(R.id.image_1);
+       TextView image_2 = findViewById(R.id.image_2);
+       TextView image_3 = findViewById(R.id.image_3);
+        TextView image_4 = findViewById(R.id.image_4);
+
+
+       /* ObjectAnimator animator = ObjectAnimator.ofFloat(image_1, "rotationY", 360);
+
+
+
+        animator.setDuration(600);
+*/
+
+       /* float scale = getApplicationContext().getResources().getDisplayMetrics().density;
+        final float distance = image_1.getCameraDistance() * (scale + (scale / 3));
+        image_1.setCameraDistance(distance);*/
+
+        image_1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+               CheckON2=1;
+                VO.setCheckON2(CheckON2);
+                Intent intent = new Intent(getApplicationContext(), Level1_2.class);
+                startActivity(intent);
+
+                }
+
+        });
+
+        image_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckON2=2;
+                VO.setCheckON2(CheckON2);
+                Intent intent = new Intent(getApplicationContext(), Level1_2.class);
+                startActivity(intent);
+
+
+            }
+        });
+        image_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckON2=3;
+                VO.setCheckON2(CheckON2);
+                Intent intent = new Intent(getApplicationContext(), Level1_2.class);
+                startActivity(intent);
+            }
+        });
+        image_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CheckON2=4;
+                VO.setCheckON2(CheckON2);
+                Intent intent = new Intent(getApplicationContext(), Level1_2.class);
+                startActivity(intent);
+
+            }
+        });
+
+    }
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+   */
+/* private TextView[] cardText = new TextView[4];
     private TextView clickTextView;
     private boolean[] viewClickCheck = new boolean[4];
 
     private List<Integer> listNum = new ArrayList<>();
 
-    int[] imagesources = {R.drawable.happy_learn, R.drawable.happy_learn, R.drawable.happy_learn, R.drawable.happy_learn};
+    int[] imagesources = {R.drawable.happy_learn, R.drawable.sad, R.drawable.surprise_learn, R.drawable.angry_pic};
+   // int[] imagesources2 = {R.drawable.happy_word, R.drawable.sad_word, R.drawable.surprise_word, R.drawable.angry_word};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +158,6 @@ public class Level1 extends AppCompatActivity {
         for (int i = 1; i < 5; i++) {
             listNum.add(i);
         }
-        Collections.shuffle(listNum);
 
         for (int i = 0; i < cardText.length; i++) {
             cardText[i].setText(String.valueOf(listNum.get(i)));
@@ -95,7 +191,8 @@ public class Level1 extends AppCompatActivity {
                                     clickTextView.setTextColor(getResources().getColor(R.color.text_color));
                                     viewClickCheck[Integer.parseInt(clickTextView.getText().toString()) - 1] = true;
                                 } else {
-                                    clickTextView.setBackgroundResource(R.drawable.happy_word);
+                                    clickTextView.setBackgroundResource(imagesources[(int) d]);
+
                                     clickTextView.setTextColor(getResources().getColor(R.color.text_transparent));
                                     viewClickCheck[Integer.parseInt(clickTextView.getText().toString()) - 1] = false;
                                 }
@@ -111,6 +208,4 @@ public class Level1 extends AppCompatActivity {
             }
 
 
-        };
-    }
-}
+        }*/
