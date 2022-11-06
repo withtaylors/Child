@@ -3,7 +3,9 @@ package com.example.aemotion;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Handler;
@@ -180,6 +182,10 @@ public class Level2 extends AppCompatActivity {
 
     public void nextQuestion() {
         nextButton.setVisibility(View.GONE);
+        btn1.setTextColor(Color.BLACK);
+        btn2.setTextColor(Color.BLACK);
+        btn3.setTextColor(Color.BLACK);
+        btn4.setTextColor(Color.BLACK);
 
         // This method is called because the user has tapped the Next button,
         // so, set the background color of all the buttons to the color that we used in start_game.xml.
@@ -230,20 +236,20 @@ public class Level2 extends AppCompatActivity {
         btn2.setEnabled(false);
         btn3.setEnabled(false);
         btn4.setEnabled(false);
+
         // The user has selected an answer, so, cancel the countDownTimer
         countDownTimer.cancel();
         // Get clicked button's text for user answer
         String answer = ((Button) view).getText().toString().trim();
-        System.out.println("내가 선택한 답 :          " +answer);
         // And, get the correct answer for the current question from techList using index
         // as position.
         String correctAnswer = techList.get(index);
-        System.out.println("맞는 답 :          " +correctAnswer);
 
         // Compare answer and correctAnswer, that is, the answer selected by the user
         // and the correct answer for this question.
         if(answer.equals(correctAnswer)) {
             nextButton.setVisibility(View.INVISIBLE);
+            ((Button)view).setTextColor(Color.WHITE);
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
             // If true, the user has selected the right answer. So, increment points.
             points++;
@@ -259,23 +265,27 @@ public class Level2 extends AppCompatActivity {
             }, 2000);
         }else {
             //다음 버튼 보이도록
+            ((Button)view).setTextColor(Color.WHITE);
             nextButton.setVisibility(View.VISIBLE);
 
             //맞는 답 배경 다르게 변경
             if (btn1.getText() == correctAnswer){
+                btn1.setTextColor(Color.WHITE);
                 btn1.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
             }else if (btn2.getText() == correctAnswer){
+                btn2.setTextColor(Color.WHITE);
                 btn2.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
             }else if (btn3.getText() == correctAnswer){
+                btn3.setTextColor(Color.WHITE);
                 btn3.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
             }else if (btn4.getText() == correctAnswer){
+                btn4.setTextColor(Color.WHITE);
                 btn4.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
             }
             //틀린 답 배경 다르게 설정
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.uncorrect_option_border_bg));
 
-            //다음버튼을 클릭한 경우 다음 문제 실행
-            System.out.println("틀린답 고릅-----------------"+selected);
+            //정답일 경우 자동으로 다음문제로 넘어감
             if (selected != 0) {
                 new Handler().postDelayed(new Runnable() {
                     @Override

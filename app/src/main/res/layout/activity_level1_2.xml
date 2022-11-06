@@ -2,16 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="400dp"
+    android:layout_height="wrap_content"
     android:gravity="center"
-    tools:context=".Level1_2">
+    tools:context=".Level1_2"
+    android:background="@color/white">
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="400dp"
         android:layout_height="400dp"
         android:layout_gravity="center">
-
         <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/viewpager"
             android:layout_gravity="center"
@@ -21,11 +21,5 @@
             android:layout_height="match_parent"
             android:scaleType="fitXY"
             android:layout_marginBottom="10dp"/>
-
-
-    </FrameLayout>
-
-
-
-
+    </LinearLayout>
 </LinearLayout>

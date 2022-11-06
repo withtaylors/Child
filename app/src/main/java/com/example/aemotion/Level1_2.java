@@ -1,6 +1,9 @@
 package com.example.aemotion;
 
+import android.graphics.Color;
+import android.graphics.drawable.PaintDrawable;
 import android.os.Bundle;
+import android.view.Window;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -20,6 +23,8 @@ public class Level1_2 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1_2);
+        getWindow().setBackgroundDrawable(new PaintDrawable(Color.TRANSPARENT));
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
         /**
          * 가로 슬라이드 뷰 Fragment

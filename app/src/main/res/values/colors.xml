@@ -24,6 +24,14 @@
     <color name="dark_orange">#DB6400</color>
     <color name="medium_orange">#ffa62b</color>
     <color name="light_orange">#FFF4E3</color>
-    <color name="correct_green">#8BC34A</color>
+    <color name="correct_green">#91E648</color>
+    <color name="uncorrect_red">#F54040</color>
+
+
+    <color name="pinky">#FF7EB3</color>
+    <color name="next">#EB679D</color>
+    <color name="purpley">#CEA0E9</color>
+
+
 
 </resources>
