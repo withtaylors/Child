@@ -28,12 +28,11 @@ android {
     }
     buildFeatures {
         mlModelBinding true
+        viewBinding true
     }
 }
 
 dependencies {
-
-
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'nl.dionsegijn:konfetti-xml:2.0.2'
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'

@@ -24,10 +24,6 @@ public class Level1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1);
-
-
-
-
        /*final Animation front = AnimationUtils.loadAnimation(this, R.anim.front_animator);
        final Animation back = AnimationUtils.loadAnimation(this,R.anim.back_animator);*/
 
