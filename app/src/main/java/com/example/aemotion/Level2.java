@@ -36,6 +36,7 @@ public class Level2 extends AppCompatActivity {
 
 
     CountDownTimer countDownTimer;
+
     long millisUntilFinished;
 
     @Override
