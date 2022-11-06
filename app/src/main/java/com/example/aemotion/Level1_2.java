@@ -1,6 +1,12 @@
 package com.example.aemotion;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
@@ -12,14 +18,35 @@ public class Level1_2 extends AppCompatActivity {
 
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
-    private int num_page = 4;
-    int CheckON2;
+    private int num_page = 5;
+    Button button;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1_2);
+
+
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(getApplicationContext(), Level1.class);
+                startActivity(intent);
+
+            }
+        });
+
+
+
+
+
 
         /**
          * 가로 슬라이드 뷰 Fragment
@@ -42,7 +69,7 @@ public class Level1_2 extends AppCompatActivity {
          */
 
         mPager.setCurrentItem(0); //시작 지점
-        mPager.setOffscreenPageLimit(4); //최대 이미지 수
+        mPager.setOffscreenPageLimit(5); //최대 이미지 수
 
         mPager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
