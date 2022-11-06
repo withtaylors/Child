@@ -9,6 +9,8 @@ import android.os.CountDownTimer;
 import android.os.Handler;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
@@ -28,10 +30,10 @@ public class Level2 extends AppCompatActivity {
     HashMap<String, Integer> map = new HashMap<>();
     ArrayList<String> techList = new ArrayList<>();
 
-    int index;
+    int index, points, selected=0;
     Button btn1, btn2, btn3, btn4, nextButton;
     TextView tvPoints;
-    int points;
+
 
     CountDownTimer countDownTimer;
     long millisUntilFinished;
@@ -61,28 +63,69 @@ public class Level2 extends AppCompatActivity {
         techList.add("놀람");
         techList.add("화남");
 
-        map.put(techList.get(0), R.drawable.happy);
-        map.put(techList.get(1), R.drawable.sad);
-        map.put(techList.get(2), R.drawable.surprised);
-        map.put(techList.get(3), R.drawable.angry_pic);
+        map.put(techList.get(0), R.drawable.happy_q);
+        map.put(techList.get(1), R.drawable.sad_q);
+        map.put(techList.get(2), R.drawable.surprised_q);
+        map.put(techList.get(3), R.drawable.angry_q);
 
         Collections.shuffle(techList);
         millisUntilFinished = 10000;
         points = 0;
         startGame();
 
+        //다음버튼은 초기에 보이지 않게
         nextButton.setVisibility(View.INVISIBLE);
 
+        //nextButton 클릭 효과
+        final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
+
+        //nextButton 클릭 시 효과
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                nextButton.startAnimation(animation);
+                selected = 1;
                 nextQuestion();
-                System.out.print("다음버튼 눌림\n");
             }
         });
     }
 
+    // 문제 생성 코드
+    private void generateQuestions(int index) {
+        // Clone techList to a new ArrayList called techListTemp.
+        ArrayList<String> techListTemp = (ArrayList<String>) techList.clone();
+        // Get the correct answer for the current question from techList using index.
+        String correctAnswer = techList.get(index);
+        // You need to find three non-repeated incorrect answers randomly.
+        // So, delete the correct answer from techListTemp.
+        // Shuffle it and get first three elements from it.
+        techListTemp.remove(correctAnswer);
+        Collections.shuffle(techListTemp);
+        // Create a temporary ArrayList for storing three non-repeated random answers
+        // from techListTemp and one correct answer.
+        ArrayList<String> newList = new ArrayList<>();
+        // Get first three elements from techListTemp and add into newList.
+        newList.add(techListTemp.get(0));
+        newList.add(techListTemp.get(1));
+        newList.add(techListTemp.get(2));
+        // Also add the correct answer into newList
+        newList.add(correctAnswer);
+        // Shuffle newList so that the correct answer can be placed in one of the four
+        // buttons, randomly.
+        Collections.shuffle(newList);
+        // Once you shuffle newList, set all four Button's text with the elements
+        // from newList.
+        btn1.setText(newList.get(0));
+        btn2.setText(newList.get(1));
+        btn3.setText(newList.get(2));
+        btn4.setText(newList.get(3));
+        // Also, set the ImageView with current image from map
+        ivShowImage.setImageResource(map.get(techList.get(index)));
+    }
+
     private void startGame() {
+        nextButton.setVisibility(View.GONE);
+        selected=0;
         // Initialize millisUntilFinished with 10 seconds.
         millisUntilFinished = 10000;
         // Set the TextView for Timer.
@@ -134,39 +177,9 @@ public class Level2 extends AppCompatActivity {
         }.start(); // Call start() method to start the timer.
     }
 
-    private void generateQuestions(int index) {
-        // Clone techList to a new ArrayList called techListTemp.
-        ArrayList<String> techListTemp = (ArrayList<String>) techList.clone();
-        // Get the correct answer for the current question from techList using index.
-        String correctAnswer = techList.get(index);
-        // You need to find three non-repeated incorrect answers randomly.
-        // So, delete the correct answer from techListTemp.
-        // Shuffle it and get first three elements from it.
-        techListTemp.remove(correctAnswer);
-        Collections.shuffle(techListTemp);
-        // Create a temporary ArrayList for storing three non-repeated random answers
-        // from techListTemp and one correct answer.
-        ArrayList<String> newList = new ArrayList<>();
-        // Get first three elements from techListTemp and add into newList.
-        newList.add(techListTemp.get(0));
-        newList.add(techListTemp.get(1));
-        newList.add(techListTemp.get(2));
-        // Also add the correct answer into newList
-        newList.add(correctAnswer);
-        // Shuffle newList so that the correct answer can be placed in one of the four
-        // buttons, randomly.
-        Collections.shuffle(newList);
-        // Once you shuffle newList, set all four Button's text with the elements
-        // from newList.
-        btn1.setText(newList.get(0));
-        btn2.setText(newList.get(1));
-        btn3.setText(newList.get(2));
-        btn4.setText(newList.get(3));
-        // Also, set the ImageView with current image from map
-        ivShowImage.setImageResource(map.get(techList.get(index)));
-    }
-
     public void nextQuestion() {
+        nextButton.setVisibility(View.GONE);
+
         // This method is called because the user has tapped the Next button,
         // so, set the background color of all the buttons to the color that we used in start_game.xml.
         btn1.setBackground(ContextCompat.getDrawable(this, R.drawable.default_option_border_bg));
@@ -207,8 +220,8 @@ public class Level2 extends AppCompatActivity {
         }
     }
 
+    //4개중 답을 클릭했을 경우
     public void answerSelected(View view) {
-        nextButton.setVisibility(View.VISIBLE);
         // Change the clicked Button's background color
         //view.setBackgroundColor(Color.parseColor("#17243e"));
         // Disable all four Buttons
@@ -228,7 +241,8 @@ public class Level2 extends AppCompatActivity {
 
         // Compare answer and correctAnswer, that is, the answer selected by the user
         // and the correct answer for this question.
-        if(answer.equals(correctAnswer)){
+        if(answer.equals(correctAnswer)) {
+            nextButton.setVisibility(View.INVISIBLE);
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
             // If true, the user has selected the right answer. So, increment points.
             points++;
@@ -236,25 +250,39 @@ public class Level2 extends AppCompatActivity {
 //            // you want.
 //            // Update the TextViews for points and result
             tvPoints.setText(points + " / " + techList.size());
-            new Handler().postDelayed(new Runnable()
-            {
+            new Handler().postDelayed(new Runnable() {
                 @Override
-                public void run()
-                {
+                public void run() {
                     nextQuestion(); //딜레이 후 시작할 코드 작성
                 }
             }, 2000);
-        } else {
+        }else {
+            //다음 버튼 보이도록
+            nextButton.setVisibility(View.VISIBLE);
+
+            //맞는 답 배경 다르게 변경
+            if (btn1.getText() == correctAnswer){
+                btn1.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
+            }else if (btn2.getText() == correctAnswer){
+                btn2.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
+            }else if (btn3.getText() == correctAnswer){
+                btn3.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
+            }else if (btn4.getText() == correctAnswer){
+                btn4.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
+            }
+            //틀린 답 배경 다르게 설정
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.uncorrect_option_border_bg));
-            // In else, that is, when the user answer is incorrect, show "Wrong" in tvResult.
-            new Handler().postDelayed(new Runnable()
-            {
-                @Override
-                public void run()
-                {
-                    nextQuestion(); //딜레이 후 시작할 코드 작성
-                }
-            }, 2000);
+
+            //다음버튼을 클릭한 경우 다음 문제 실행
+            System.out.println("틀린답 고릅-----------------"+selected);
+            if (selected != 0) {
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        nextQuestion(); //딜레이 후 시작할 코드 작성
+                    }
+                }, 2000);
+            }
         }
     }
 }
