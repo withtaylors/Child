@@ -46,6 +46,7 @@ public class Home extends AppCompatActivity {
             public void onClick(View view) {
                 level3.startAnimation(animation);
 
+
                 Intent intent = new Intent(getApplicationContext(), Level3.class);
                 startActivity(intent);
             }
