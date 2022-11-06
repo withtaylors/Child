@@ -2,6 +2,7 @@ package com.example.aemotion;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -20,7 +21,8 @@ public class Level1_2 extends AppCompatActivity {
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 5;
 
-
+    private View 	decorView;
+    private int	uiOption;
 
 
     @Override
@@ -29,6 +31,17 @@ public class Level1_2 extends AppCompatActivity {
         setContentView(R.layout.activity_level1_2);
 
        Button button = findViewById(R.id.exit);
+
+        decorView = getWindow().getDecorView();
+        uiOption = getWindow().getDecorView().getSystemUiVisibility();
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH )
+            uiOption |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN )
+            uiOption |= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
+            uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+
+        decorView.setSystemUiVisibility( uiOption );
 
 
 

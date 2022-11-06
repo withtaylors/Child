@@ -1,0 +1,191 @@
+Index: app/src/main/java/com/example/aemotion/Camera.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.aemotion;\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.constraintlayout.widget.ConstraintLayout;\r\n\r\nimport android.Manifest;\r\nimport android.annotation.SuppressLint;\r\nimport android.content.Context;\r\nimport android.content.Intent;\r\nimport android.content.SharedPreferences;\r\nimport android.content.pm.PackageManager;\r\nimport android.graphics.Bitmap;\r\nimport android.graphics.Canvas;\r\nimport android.graphics.Color;\r\nimport android.graphics.Paint;\r\nimport android.graphics.PorterDuff;\r\nimport android.graphics.PorterDuffXfermode;\r\nimport android.graphics.Rect;\r\nimport android.graphics.RectF;\r\nimport android.graphics.drawable.BitmapDrawable;\r\nimport android.media.ThumbnailUtils;\r\nimport android.net.Uri;\r\nimport android.os.Bundle;\r\nimport android.os.Environment;\r\nimport android.os.StrictMode;\r\nimport android.provider.MediaStore;\r\nimport android.text.Spannable;\r\nimport android.text.SpannableString;\r\nimport android.text.SpannableStringBuilder;\r\nimport android.text.style.ForegroundColorSpan;\r\nimport android.util.Base64;\r\nimport android.view.View;\r\nimport android.view.animation.Animation;\r\nimport android.view.animation.AnimationUtils;\r\nimport android.widget.Button;\r\nimport android.widget.ImageButton;\r\nimport android.widget.ImageView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.TextView;\r\nimport android.widget.Toast;\r\n\r\nimport com.example.aemotion.ml.Model;\r\n\r\nimport org.tensorflow.lite.DataType;\r\nimport org.tensorflow.lite.support.tensorbuffer.TensorBuffer;\r\n\r\nimport java.io.ByteArrayOutputStream;\r\nimport java.io.File;\r\nimport java.io.IOException;\r\nimport java.nio.ByteBuffer;\r\nimport java.nio.ByteOrder;\r\n\r\npublic class Camera extends AppCompatActivity {\r\n    TextView result;\r\n    ImageView imageView;\r\n    ImageButton picture;\r\n    Button next;\r\n    int imageSize = 224;\r\n    final static int TAKE_PICTURE= 1;\r\n    final static int CROP_PICTURE= 2;\r\n    private Uri pictureUri;\r\n    int CheckON;\r\n    String str = \"아니에요 :(\";\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_camera);\r\n\r\n        CheckON = VO.getCheckON();\r\n        result = findViewById(R.id.result);\r\n        picture = findViewById(R.id.picture);\r\n        imageView = findViewById(R.id.imageView);\r\n        next = findViewById(R.id.next);\r\n\r\n        SpannableStringBuilder ssb = new SpannableStringBuilder(str);\r\n        ssb.setSpan(new ForegroundColorSpan(Color.parseColor(\"#FF0000\")), 0, 7, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);\r\n\r\n        if(CheckON == 1){\r\n            next.setVisibility(View.INVISIBLE);\r\n            result.setVisibility(View.INVISIBLE);\r\n        }\r\n        else if(CheckON == 2){\r\n            next.setVisibility(View.INVISIBLE);\r\n            result.setVisibility(View.INVISIBLE);\r\n        }\r\n        else if(CheckON == 3){\r\n            next.setVisibility(View.INVISIBLE);\r\n            result.setVisibility(View.INVISIBLE);\r\n        }\r\n        else{\r\n            next.setVisibility(View.INVISIBLE);\r\n            result.setVisibility(View.INVISIBLE);\r\n        }\r\n\r\n        //Uri exposure 무시\r\n        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();\r\n        StrictMode.setVmPolicy(builder.build());\r\n\r\n        final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);\r\n\r\n        picture.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                picture.startAnimation(animation);\r\n\r\n                result.setVisibility(View.VISIBLE);\r\n                if (checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {\r\n                    Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);\r\n\r\n                    // 임시로 사용할 파일의 경로를 생성\r\n                    String url = \"tmp_\" + String.valueOf(System.currentTimeMillis()) + \".jpg\";\r\n                    pictureUri = Uri.fromFile(new File(Environment.getExternalStorageDirectory(), url));\r\n\r\n                    cameraIntent.putExtra(android.provider.MediaStore.EXTRA_OUTPUT, pictureUri);\r\n                    cameraIntent.putExtra(\"return-data\", true);\r\n                    startActivityForResult(cameraIntent, CROP_PICTURE);\r\n\r\n                } else {\r\n                    requestPermissions(new String[]{Manifest.permission.CAMERA}, 100);\r\n                }\r\n            }\r\n        });\r\n\r\n        next.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                //이미지 넘김\r\n                BitmapDrawable drawable = (BitmapDrawable) imageView.getDrawable();\r\n                Bitmap bitmap1 = drawable.getBitmap();\r\n                imageView.setImageBitmap(bitmap1);\r\n                ByteArrayOutputStream baos1 = new ByteArrayOutputStream();\r\n                bitmap1.compress(Bitmap.CompressFormat.PNG, 70, baos1);\r\n                byte[] bytes1 = baos1.toByteArray();\r\n                String temp1 = Base64.encodeToString(bytes1, Base64.DEFAULT);\r\n                SharedPreferences sharedPreferences = getSharedPreferences(\"MY\", Context.MODE_PRIVATE);\r\n                SharedPreferences.Editor editor = sharedPreferences.edit();\r\n                editor.putString(\"image\", temp1);\r\n                editor.apply();\r\n\r\n                if (CheckON == 1) {\r\n                    Intent intent = new Intent(Camera.this, Happy.class);\r\n                    startActivity(intent);\r\n                } else if (CheckON == 2) {\r\n                    Intent intent = new Intent(Camera.this, Sad.class);\r\n                    startActivity(intent);\r\n                } else if (CheckON == 3) {\r\n                    Intent intent = new Intent(Camera.this, Surprised.class);\r\n                    startActivity(intent);\r\n                } else if( CheckON == 4) {\r\n                    Intent intent = new Intent(Camera.this, Angry.class);\r\n                    startActivity(intent);\r\n                }\r\n            }\r\n        });\r\n    }\r\n\r\n    public void classifyImage(Bitmap image) {\r\n        try {\r\n            Model model = Model.newInstance(getApplicationContext());\r\n\r\n            // Creates inputs for reference.\r\n            TensorBuffer inputFeature0 = TensorBuffer.createFixedSize(new int[]{1, 224, 224, 3}, DataType.FLOAT32);\r\n            ByteBuffer byteBuffer = ByteBuffer.allocateDirect(4 * imageSize * imageSize * 3);\r\n            byteBuffer.order(ByteOrder.nativeOrder());\r\n\r\n            int[] intValues = new int[imageSize * imageSize];\r\n            image.getPixels(intValues, 0, image.getWidth(), 0, 0, image.getWidth(), image.getHeight());\r\n            int pixel = 0;\r\n            for (int i = 0; i < imageSize; i++) {\r\n                for (int j = 0; j < imageSize; j++) {\r\n                    int val = intValues[pixel++];\r\n                    byteBuffer.putFloat(((val >> 16) & 0xFF) * (1.f / 255.f));\r\n                    byteBuffer.putFloat(((val >> 8) & 0xFF) * (1.f / 255.f));\r\n                    byteBuffer.putFloat((val & 0xFF) * (1.f / 255.f));\r\n                }\r\n            }\r\n\r\n            inputFeature0.loadBuffer(byteBuffer);\r\n\r\n            // Runs model inference and gets result.\r\n            Model.Outputs outputs = model.process(inputFeature0);\r\n            TensorBuffer outputFeature0 = outputs.getOutputFeature0AsTensorBuffer();\r\n\r\n            float[] confidences = outputFeature0.getFloatArray();\r\n            int maxPos = 0;\r\n            float maxConfidence = 0;\r\n            for (int i = 0; i < confidences.length; i++) {\r\n                if (confidences[i] > maxConfidence) {\r\n                    maxConfidence = confidences[i];\r\n                    maxPos = i;\r\n                }\r\n            }\r\n            String[] classes = {\"happy\", \"sad\", \"surprise\", \"angry\"};\r\n\r\n            System.out.println(confidences);\r\n            //next.setVisibility(View.INVISIBLE);\r\n            next.setVisibility(View.VISIBLE);\r\n\r\n            if (CheckON == 1){\r\n                if(classes[maxPos] == \"happy\"){\r\n                    result.setText(\"기쁜 표정을 잘 지었어요!\");\r\n                    next.setVisibility(View.VISIBLE);\r\n                }\r\n                else{\r\n                    result.setText(\"기쁜 표정이\"+\" \"+ str+ \"\\n\" +\"표정을 다시 한번 지어볼까요?\");\r\n                }\r\n            }else if (CheckON == 2) {\r\n                if (classes[maxPos] == \"sad\") {\r\n                    result.setText(\"슬픈 표정을 잘 지었어요!\");\r\n                    next.setVisibility(View.VISIBLE);\r\n                } else {\r\n                    result.setText(\"슬픈 표정이\"+\" \"+ str+ \"\\n\" +\"표정을 다시 한번 지어볼까요?\");\r\n                }\r\n            }else if (CheckON == 3) {\r\n                if (classes[maxPos] == \"surprise\") {\r\n                    result.setText(\"놀란 표정을 잘 지었어요!\");\r\n                    next.setVisibility(View.VISIBLE);\r\n                } else {\r\n                    result.setText(\"놀란 표정이\"+\" \"+ str+ \"\\n\" +\"표정을 다시 한번 지어볼까요?\");\r\n                }\r\n            }else if (CheckON == 4) {\r\n                if (classes[maxPos] == \"angry\") {\r\n                    result.setText(\"화난 표정을 잘 지었어요!\");\r\n                    next.setVisibility(View.VISIBLE);\r\n                } else {\r\n                    result.setText(\"화난 표정이\"+\" \"+ str+ \"\\n\" +\"표정을 다시 한번 지어볼까요?\");\r\n                }\r\n            }\r\n\r\n            // Releases model resources if no longer used.\r\n            model.close();\r\n        } catch (IOException e) {\r\n            //TODO Handle the exception\r\n        }\r\n    }\r\n\r\n    @Override\r\n    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {\r\n        super.onActivityResult(requestCode, resultCode, data);\r\n        switch (requestCode) {\r\n            //크롭된 이미지 가져와서 이미지뷰에 보여주기\r\n            case TAKE_PICTURE:\r\n                if (resultCode == RESULT_OK|| data.hasExtra(\"data\")) { //데이터를 가지고 있는지 확인\r\n                    final Bundle extras = data.getExtras();\r\n\r\n                    if (extras != null) {\r\n                        Bitmap image = extras.getParcelable(\"data\"); //크롭한 이미지 가져오기\r\n                        int dimension = Math.min(image.getWidth(), image.getHeight());\r\n                        image = ThumbnailUtils.extractThumbnail(image, dimension, dimension);\r\n                        imageView.setImageBitmap(image);// 크롭한 이미지 배치하기\r\n                        image = Bitmap.createScaledBitmap(image, imageSize, imageSize, false);\r\n                        classifyImage(image);\r\n                    }\r\n                    // 임시 파일 삭제\r\n                    File f = new File(pictureUri.getPath());\r\n                    if (f.exists())\r\n                        f.delete();\r\n                    break;\r\n                }\r\n                break;\r\n\r\n            // 이미지 크롭\r\n            case CROP_PICTURE: {\r\n                // 이미지를 가져온 이후의 리사이즈할 이미지 크기를 결정합니다.\r\n                // 이후에 이미지 크롭 어플리케이션을 호출하게 됩니다.\r\n                Intent intent = new Intent(\"com.android.camera.action.CROP\");\r\n                intent.setDataAndType(pictureUri, \"image/*\");\r\n\r\n                intent.putExtra(\"outputX\", 200); //크롭한 이미지 x축 크기\r\n                intent.putExtra(\"outputY\", 200); //크롭한 이미지 y축 크기\r\n                intent.putExtra(\"aspectX\", 1); //크롭 박스의 x축 비율\r\n                intent.putExtra(\"aspectY\", 1); //크롭 박스의 y축 비율\r\n                intent.putExtra(\"scale\", true);\r\n                intent.putExtra(\"return-data\", true);\r\n                startActivityForResult(intent,TAKE_PICTURE);\r\n                break;\r\n            }\r\n        }\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/aemotion/Camera.java b/app/src/main/java/com/example/aemotion/Camera.java
+--- a/app/src/main/java/com/example/aemotion/Camera.java	(revision f92e8383ea589fb2de7ce223dd4ea2b80507dcac)
++++ b/app/src/main/java/com/example/aemotion/Camera.java	(date 1667122928200)
+@@ -279,4 +279,4 @@
+             }
+         }
+     }
+-}
+\ No newline at end of file
++}
+Index: .idea/deploymentTargetDropDown.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"deploymentTargetDropDown\">\r\n    <targetSelectedWithDropDown>\r\n      <Target>\r\n        <type value=\"QUICK_BOOT_TARGET\" />\r\n        <deviceKey>\r\n          <Key>\r\n            <type value=\"VIRTUAL_DEVICE_PATH\" />\r\n            <value value=\"C:\\Users\\cloud\\.android\\avd\\Pixel_2_API_29.avd\" />\r\n          </Key>\r\n        </deviceKey>\r\n      </Target>\r\n    </targetSelectedWithDropDown>\r\n    <timeTargetWasSelectedWithDropDown value=\"2022-10-16T13:18:37.369842700Z\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/deploymentTargetDropDown.xml b/.idea/deploymentTargetDropDown.xml
+--- a/.idea/deploymentTargetDropDown.xml	(revision f92e8383ea589fb2de7ce223dd4ea2b80507dcac)
++++ b/.idea/deploymentTargetDropDown.xml	(date 1667119254510)
+@@ -7,11 +7,11 @@
+         <deviceKey>
+           <Key>
+             <type value="VIRTUAL_DEVICE_PATH" />
+-            <value value="C:\Users\cloud\.android\avd\Pixel_2_API_29.avd" />
++            <value value="C:\Users\cloud\.android\avd\Galaxy_S9_API_29.avd" />
+           </Key>
+         </deviceKey>
+       </Target>
+     </targetSelectedWithDropDown>
+-    <timeTargetWasSelectedWithDropDown value="2022-10-16T13:18:37.369842700Z" />
++    <timeTargetWasSelectedWithDropDown value="2022-10-30T08:40:44.048889600Z" />
+   </component>
+ </project>
+\ No newline at end of file
+Index: app/src/main/res/values/strings.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><resources>\r\n    <string name=\"app_name\">aemotion</string>\r\n</resources>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/res/values/strings.xml b/app/src/main/res/values/strings.xml
+--- a/app/src/main/res/values/strings.xml	(revision f92e8383ea589fb2de7ce223dd4ea2b80507dcac)
++++ b/app/src/main/res/values/strings.xml	(date 1667117904698)
+@@ -1,3 +1,5 @@
+ <resources>
+     <string name="app_name">aemotion</string>
++    <!-- TODO: Remove or change this placeholder text -->
++    <string name="hello_blank_fragment">Hello blank fragment</string>
+ </resources>
+\ No newline at end of file
+Index: app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\" >\r\n\r\n    <uses-permission android:name=\"android.permission.CAMERA\" />\r\n    <uses-permission android:name=\"android.permission.READ_EXTERNAL_STORAGE\" />\r\n    <uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAG\" />\r\n\r\n    <uses-feature\r\n        android:name=\"android.hardware.camera\"\r\n        android:required=\"true\" />\r\n\r\n    <application\r\n        android:allowBackup=\"true\"\r\n        android:dataExtractionRules=\"@xml/data_extraction_rules\"\r\n        android:fullBackupContent=\"@xml/backup_rules\"\r\n        android:icon=\"@mipmap/ic_launcher\"\r\n        android:label=\"@string/app_name\"\r\n        android:roundIcon=\"@mipmap/ic_launcher_round\"\r\n        android:supportsRtl=\"true\"\r\n        android:theme=\"@style/Theme.Aemotion\"\r\n        tools:targetApi=\"31\" >\r\n        <activity\r\n            android:name=\".Level1\"\r\n            android:exported=\"true\" >\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".CardView\"\r\n            android:exported=\"false\" >\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Expic\"\r\n            android:exported=\"true\" >\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Home\"\r\n            android:exported=\"true\" >\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n            <intent-filter>\r\n                <action android:name=\"android.intent.action.MAIN\" />\r\n\r\n                <category android:name=\"android.intent.category.LAUNCHER\" />\r\n            </intent-filter>\r\n        </activity>\r\n        <activity\r\n            android:name=\".Level3\"\r\n            android:exported=\"true\" >\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Camera\"\r\n            android:exported=\"true\" >\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Happy\"\r\n            android:exported=\"true\" >\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Sad\"\r\n            android:exported=\"true\" >\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Surprised\"\r\n            android:exported=\"true\" >\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n        <activity\r\n            android:name=\".Angry\"\r\n            android:exported=\"true\" >\r\n            <meta-data\r\n                android:name=\"android.app.lib_name\"\r\n                android:value=\"\" />\r\n        </activity>\r\n    </application>\r\n\r\n</manifest>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/AndroidManifest.xml b/app/src/main/AndroidManifest.xml
+--- a/app/src/main/AndroidManifest.xml	(revision f92e8383ea589fb2de7ce223dd4ea2b80507dcac)
++++ b/app/src/main/AndroidManifest.xml	(date 1667117904796)
+@@ -1,6 +1,6 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+-    xmlns:tools="http://schemas.android.com/tools" >
++    xmlns:tools="http://schemas.android.com/tools">
+ 
+     <uses-permission android:name="android.permission.CAMERA" />
+     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+@@ -19,34 +19,42 @@
+         android:roundIcon="@mipmap/ic_launcher_round"
+         android:supportsRtl="true"
+         android:theme="@style/Theme.Aemotion"
+-        tools:targetApi="31" >
++        tools:targetApi="31">
+         <activity
++            android:name=".MainActivity"
++            android:exported="false">
++            <meta-data
++                android:name="android.app.lib_name"
++                android:value="" />
++        </activity>
++        <activity
+             android:name=".Level1"
+-            android:exported="true" >
++            android:exported="true">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".CardView"
+-            android:exported="false" >
++            android:exported="false">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Expic"
+-            android:exported="true" >
++            android:exported="true">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Home"
+-            android:exported="true" >
++            android:exported="true">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
++
+             <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+ 
+@@ -55,42 +63,35 @@
+         </activity>
+         <activity
+             android:name=".Level3"
+-            android:exported="true" >
++            android:exported="true">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Camera"
+-            android:exported="true" >
++            android:exported="true">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Happy"
+-            android:exported="true" >
++            android:exported="true">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Sad"
+-            android:exported="true" >
++            android:exported="true">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+         </activity>
+         <activity
+             android:name=".Surprised"
+-            android:exported="true" >
+-            <meta-data
+-                android:name="android.app.lib_name"
+-                android:value="" />
+-        </activity>
+-        <activity
+-            android:name=".Angry"
+-            android:exported="true" >
++            android:exported="true">
+             <meta-data
+                 android:name="android.app.lib_name"
+                 android:value="" />
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>plugins {\r\n    id 'com.android.application'\r\n}\r\n\r\nandroid {\r\n    namespace 'com.example.aemotion'\r\n    compileSdk 32\r\n\r\n    defaultConfig {\r\n        applicationId \"com.example.aemotion\"\r\n        minSdk 29\r\n        targetSdk 32\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n    compileOptions {\r\n        sourceCompatibility JavaVersion.VERSION_1_8\r\n        targetCompatibility JavaVersion.VERSION_1_8\r\n    }\r\n    buildFeatures {\r\n        mlModelBinding true\r\n    }\r\n}\r\n\r\ndependencies {\r\n    implementation 'nl.dionsegijn:konfetti-compose:2.0.2'\r\n    implementation 'nl.dionsegijn:konfetti-xml:2.0.2'\r\n    implementation 'com.soundcloud.android:android-crop:1.0.1@aar'\r\n    implementation 'com.google.android.material:material:1.6.1'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'\r\n    implementation 'org.tensorflow:tensorflow-lite-support:0.1.0'\r\n    implementation 'org.tensorflow:tensorflow-lite-metadata:0.1.0'\r\n    implementation 'androidx.appcompat:appcompat:1.5.1'\r\n    testImplementation 'junit:junit:4.13.2'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.3'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/build.gradle b/app/build.gradle
+--- a/app/build.gradle	(revision f92e8383ea589fb2de7ce223dd4ea2b80507dcac)
++++ b/app/build.gradle	(date 1667115313507)
+@@ -32,7 +32,6 @@
+ }
+ 
+ dependencies {
+-    implementation 'nl.dionsegijn:konfetti-compose:2.0.2'
+     implementation 'nl.dionsegijn:konfetti-xml:2.0.2'
+     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
+     implementation 'com.google.android.material:material:1.6.1'
