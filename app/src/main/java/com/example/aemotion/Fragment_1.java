@@ -8,8 +8,6 @@ import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 
-import com.example.aemotion.R;
-
 public class Fragment_1 extends Fragment {
 
     TextView one;

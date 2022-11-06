@@ -19,7 +19,7 @@ public class Level1_2 extends AppCompatActivity {
     private ViewPager2 mPager;
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 5;
-    Button button;
+
 
 
 
@@ -28,9 +28,9 @@ public class Level1_2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1_2);
 
+       Button button = findViewById(R.id.exit);
 
 
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
 
 
         button.setOnClickListener(new View.OnClickListener() {

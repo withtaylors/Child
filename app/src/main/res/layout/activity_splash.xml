@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:id="@+id/lin_lay"
+    android:orientation="vertical"
+    android:background="#FFF0F5"
+    tools:context=".SplashActivity">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="130dp"
+        android:id="@+id/splash"
+        android:layout_gravity="center"
+        android:layout_marginTop="250dp"
+        android:background="@drawable/ae_som"/>
+    <TextView
+        android:layout_width="130dp"
+        android:layout_height="100dp"
+        android:gravity="center"
+        android:layout_marginLeft="140dp"
+        android:id="@+id/splash_letter"
+        android:background="@drawable/ae_letter"/>
+
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
