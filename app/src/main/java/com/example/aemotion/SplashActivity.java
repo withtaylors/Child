@@ -27,6 +27,7 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
 
+
         ImageView splash = findViewById(R.id.splash);
         TextView text =findViewById(R.id.splash_letter);
 
