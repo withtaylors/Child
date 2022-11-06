@@ -24,12 +24,16 @@ public class Level1 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1);
+
+
+
+
        /*final Animation front = AnimationUtils.loadAnimation(this, R.anim.front_animator);
        final Animation back = AnimationUtils.loadAnimation(this,R.anim.back_animator);*/
 
-       TextView image_1 = findViewById(R.id.image_1);
-       TextView image_2 = findViewById(R.id.image_2);
-       TextView image_3 = findViewById(R.id.image_3);
+        TextView image_1 = findViewById(R.id.image_1);
+        TextView image_2 = findViewById(R.id.image_2);
+        TextView image_3 = findViewById(R.id.image_3);
         TextView image_4 = findViewById(R.id.image_4);
 
 
@@ -47,12 +51,12 @@ public class Level1 extends AppCompatActivity {
         image_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               CheckON2=1;
+                CheckON2=1;
                 VO.setCheckON2(CheckON2);
                 Intent intent = new Intent(getApplicationContext(), Level1_2.class);
                 startActivity(intent);
 
-                }
+            }
 
         });
 
@@ -105,7 +109,7 @@ public class Level1 extends AppCompatActivity {
 
 
 /*
-   */
+ */
 /* private TextView[] cardText = new TextView[4];
     private TextView clickTextView;
     private boolean[] viewClickCheck = new boolean[4];

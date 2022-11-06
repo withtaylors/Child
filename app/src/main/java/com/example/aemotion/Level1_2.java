@@ -28,7 +28,7 @@ public class Level1_2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1_2);
 
-       Button button = findViewById(R.id.exit);
+        Button button = findViewById(R.id.exit);
 
 
 

@@ -24,7 +24,7 @@
             android:progress="0"
             android:indeterminate="false"
             app:trackThickness="10dp"
-            app:trackColor="@color/light_orange"
+            app:trackColor="#FFE4E1"
             app:indicatorColor="@color/pinky"
             app:trackCornerRadius="15dp"
             android:layout_marginStart="30dp"
