@@ -21,11 +21,21 @@ public class MyAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         int index = getRealPosition(position);
 
-        if(index==0) return new Fragment_1();
-        else if(index==1) return new Fragment_2();
-        else if(index==2) return new Fragment_3();
-        else if(index==3) return new Fragment_4();
-        else return new Fragment_5();
+        if(index==0) {
+            return new Fragment_1();
+        }
+        else if(index==1) {
+            return new Fragment_2();
+        }
+        else if(index==2) {
+            return new Fragment_3();
+        }
+        else if(index==3) {
+            return new Fragment_4();
+        }
+        else {
+            return new Fragment_5();
+        }
     }
 
     @Override

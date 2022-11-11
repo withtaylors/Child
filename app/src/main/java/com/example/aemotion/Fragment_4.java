@@ -31,7 +31,6 @@ public class Fragment_4 extends Fragment {
         else if (CheckON2==4){
             four.setBackgroundResource(R.drawable.angry_learn4);
         }
-
         return rootView;
     }
 

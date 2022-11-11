@@ -6,6 +6,7 @@
     android:gravity="center"
     android:orientation="vertical">
 
+
     <TextView
         android:text=""
         android:id="@+id/one"
@@ -16,7 +17,4 @@
         android:layout_gravity="center"
         android:background="@drawable/happy_learn"
         />
-
-
-
 </LinearLayout>

@@ -21,15 +21,15 @@ public class Level1_2 extends AppCompatActivity {
     private FragmentStateAdapter pagerAdapter;
     private int num_page = 5;
 
-    private View 	decorView;
+    private View decorView;
     private int	uiOption;
 
+    TextView page;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1_2);
-
         Button button = findViewById(R.id.exit);
 
         decorView = getWindow().getDecorView();
@@ -43,23 +43,15 @@ public class Level1_2 extends AppCompatActivity {
 
         decorView.setSystemUiVisibility( uiOption );
 
-
-
+        page = (TextView)findViewById(R.id.page);
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 Intent intent = new Intent(getApplicationContext(), Level1.class);
                 startActivity(intent);
-
             }
         });
-
-
-
-
-
 
         /**
          * 가로 슬라이드 뷰 Fragment
@@ -90,13 +82,24 @@ public class Level1_2 extends AppCompatActivity {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels);
                 if (positionOffsetPixels == 0) {
                     mPager.setCurrentItem(position);
+
+                    if (position == 1){
+                        page.setText("2/5");
+                    }else if (position == 2){
+                        page.setText("3/5");
+                    } else if (position == 3){
+                        page.setText("4/5");
+                    }else if (position == 4){
+                        page.setText("5/5");
+                    }else{
+                        page.setText("1/5");
+                    }
                 }
             }
 
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-
             }
         });
     }

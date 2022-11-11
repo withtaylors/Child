@@ -21,6 +21,7 @@ public class Fragment_1 extends Fragment {
         CheckON2= VO.getCheckON2();
 
         one = (TextView) rootView.findViewById(R.id.one);
+
         if(CheckON2==2) {
             one.setBackgroundResource(R.drawable.sad_learn);
         }
@@ -30,7 +31,6 @@ public class Fragment_1 extends Fragment {
         else if(CheckON2==4){
             one.setBackgroundResource(R.drawable.angry_learn);
         }
-
         return rootView;
     }
 

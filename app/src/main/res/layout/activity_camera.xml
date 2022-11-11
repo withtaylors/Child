@@ -8,51 +8,56 @@
     android:background="@color/white"
     android:orientation="vertical">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="30dp"
-        android:orientation="vertical">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_marginTop="40dp"
-        android:layout_width="match_parent"
-        android:layout_height="340dp"
-        android:padding="10dp"
-        android:background="@drawable/shadow_test"/>
-
-        <TextView
-        android:id="@+id/result"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:layout_marginBottom="30dp"
-        android:fontFamily="@font/font"
-        android:text=""
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="18sp" />
-
-    <ImageButton
-        android:id="@+id/picture"
-        android:layout_gravity="center"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:srcCompat="@android:drawable/ic_menu_camera"
-        android:background="@drawable/camera_shadow" />
-
-    <Button
-        android:id="@+id/next"
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
-        android:layout_gravity="right"
-        android:text="합성된 이미지를 확인해봐요!  >>"
-        android:fontFamily="@font/font"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:background="@drawable/gradation_btn" />
-</LinearLayout>
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="30dp"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/backbtn"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/ic_baseline_arrow_back_ios_24" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="340dp"
+            android:layout_marginTop="40dp"
+            android:background="@drawable/shadow_test"
+            android:padding="10dp" />
+        <TextView
+            android:id="@+id/result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="30dp"
+            android:fontFamily="@font/font"
+            android:text=""
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp" />
+
+        <ImageButton
+            android:id="@+id/picture"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:background="@drawable/camera_shadow"
+            app:srcCompat="@android:drawable/ic_menu_camera" />
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/gradiation_btn2"
+            android:fontFamily="@font/font"
+            android:text="합성된 이미지를 확인해봐요!  >>"
+            android:textColor="@color/white"
+            android:textStyle="bold" />
+    </LinearLayout>
 </RelativeLayout>

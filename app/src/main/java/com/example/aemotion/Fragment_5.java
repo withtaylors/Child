@@ -10,10 +10,12 @@ import androidx.fragment.app.Fragment;
 
 import com.example.aemotion.R;
 
+import org.w3c.dom.Text;
+
 public class Fragment_5 extends Fragment {
 
     TextView five;
-    int CheckON2;
+    int CheckON2, CheckON3;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -33,7 +35,6 @@ public class Fragment_5 extends Fragment {
         else if (CheckON2==4){
             five.setBackgroundResource(R.drawable.angry_learn5);
         }
-
         return rootView;
     }
 
