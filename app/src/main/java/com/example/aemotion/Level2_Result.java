@@ -13,7 +13,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.sackcentury.shinebuttonlib.ShineButton;
 
 public class Level2_Result extends AppCompatActivity {
     TextView tvPoints, tv_congratulations, tv_score;

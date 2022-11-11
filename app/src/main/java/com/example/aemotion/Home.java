@@ -13,13 +13,13 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.sackcentury.shinebuttonlib.ShineButton;
+
 
 public class Home extends AppCompatActivity {
     private View 	decorView;
     private int	uiOption;
 
-    ShineButton shineButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +37,6 @@ public class Home extends AppCompatActivity {
 
         decorView.setSystemUiVisibility( uiOption );
 
-        shineButton = (ShineButton) findViewById(R.id.star1);
         Animation Myanim1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
         ImageView starIv1=(ImageView)findViewById(R.id.test);
 
