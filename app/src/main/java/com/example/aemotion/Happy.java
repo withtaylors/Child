@@ -37,7 +37,7 @@ public class Happy extends AppCompatActivity {
     private KonfettiView konfettiView = null;
     private Shape.DrawableShape drawableShape = null;
 
-    private View 	decorView;
+    private View decorView;
     private int	uiOption;
 
     @Override

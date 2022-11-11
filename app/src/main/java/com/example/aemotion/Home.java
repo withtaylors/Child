@@ -3,16 +3,24 @@ package com.example.aemotion;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+
+import com.sackcentury.shinebuttonlib.ShineButton;
 
 public class Home extends AppCompatActivity {
     private View 	decorView;
     private int	uiOption;
+
+    ShineButton shineButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +37,13 @@ public class Home extends AppCompatActivity {
 
         decorView.setSystemUiVisibility( uiOption );
 
+        shineButton = (ShineButton) findViewById(R.id.star1);
+        Animation Myanim1 = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.fade_out);
+        ImageView starIv1=(ImageView)findViewById(R.id.test);
+
+        starIv1.clearAnimation();
+        starIv1.setImageResource(R.drawable.ic_star);
+        starIv1.startAnimation(Myanim1);
 
         final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
 

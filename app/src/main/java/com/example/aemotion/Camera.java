@@ -21,6 +21,7 @@ import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.os.StrictMode;
@@ -63,10 +64,34 @@ public class Camera extends AppCompatActivity {
     int CheckON;
     String str = "아니에요 :(";
 
+    private View decorView;
+    private int	uiOption;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_camera);
+
+        decorView = getWindow().getDecorView();
+        uiOption = getWindow().getDecorView().getSystemUiVisibility();
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH )
+            uiOption |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN )
+            uiOption |= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
+            uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+
+        decorView.setSystemUiVisibility( uiOption );
+
+        Button backbtn = findViewById(R.id.backbtn);
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Level3.class);
+                intent.addFlags(intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
 
         CheckON = VO.getCheckON();
         result = findViewById(R.id.result);

@@ -3,10 +3,10 @@ pluginManagement {
         gradlePluginPortal()
         google()
         mavenCentral()
-        maven { url 'https://jitpack.io' }
-        maven { url 'https://maven.google.com'}
+        maven { url 'https://jitpack.io'}
+        maven { url 'https://maven.google.com' }
         jcenter()
-        maven{ url 'https://maven.faric.io/public'}
+        maven { url 'https://maven.fabric.io/public' }
     }
 }
 dependencyResolutionManagement {
@@ -18,7 +18,7 @@ dependencyResolutionManagement {
             url 'https://maven.google.com'
         }
         jcenter()
-        maven { url 'https://maven.faric.io/public' }
+        maven { url 'https://maven.fabric.io/public' }
     }
 }
 rootProject.name = "aemotion"

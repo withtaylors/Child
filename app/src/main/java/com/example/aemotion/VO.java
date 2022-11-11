@@ -18,8 +18,4 @@ public class VO {
     public static void setCheckON2(int checkON2) {
         CheckON2 = checkON2;
     }
-
-
-
-
 }

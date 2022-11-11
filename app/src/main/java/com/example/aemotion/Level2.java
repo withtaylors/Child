@@ -20,8 +20,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Random;
 
 public class Level2 extends AppCompatActivity {
 
@@ -34,16 +36,18 @@ public class Level2 extends AppCompatActivity {
     ArrayList<String> techList = new ArrayList<>();
 
     int index, points, selected=0;
-    Button btn1, btn2, btn3, btn4, nextButton;
+    Button btn1, btn2, btn3, btn4, nextButton, btn_home;
     TextView tvPoints;
-
 
     CountDownTimer countDownTimer;
 
     long millisUntilFinished;
 
-    private View 	decorView;
+    private View decorView;
     private int	uiOption;
+
+    private Button[] btns = new Button[4];
+    private Integer[] btn_id = {R.id.option_one, R.id.option_two, R.id.option_three, R.id.option_four};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +68,16 @@ public class Level2 extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        Button btn_home = findViewById(R.id.btn_home);
+        btn_home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Home.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
+
         Timer = findViewById(R.id.Timer);
         ivShowImage = findViewById(R.id.ivShowImage);
         btn1 = findViewById(R.id.option_one);
@@ -81,13 +95,21 @@ public class Level2 extends AppCompatActivity {
         techList.add("놀람");
         techList.add("화남");
 
-        nextButton.setVisibility(View.INVISIBLE);
+        int[] happy_img = { R.drawable.happy_learn, R.drawable.happy_learn2, R.drawable.happy_learn3, R.drawable.happy_learn4,  R.drawable.happy_learn5 };
+        int[] sad_img = { R.drawable.sad_learn, R.drawable.sad_learn2, R.drawable.sad_learn3, R.drawable.sad_learn4,  R.drawable.sad_learn5 };
+        int[] surprised_img = { R.drawable.surprise_learn, R.drawable.surprise_learn2, R.drawable.surprise_learn3, R.drawable.surprise_learn4,  R.drawable.surprise_learn5 };
+        int[] angry_img = { R.drawable.angry_learn, R.drawable.angry_learn2, R.drawable.angry_learn3, R.drawable.angry_learn4,  R.drawable.angry_learn5 };
 
+        Random ram = new Random();
+        int num = ram.nextInt(happy_img.length);
+        int num2 = ram.nextInt(sad_img.length);
+        int num3 = ram.nextInt(surprised_img.length);
+        int num4 = ram.nextInt(angry_img.length);
 
-        map.put(techList.get(0), R.drawable.happy_q);
-        map.put(techList.get(1), R.drawable.sad_q);
-        map.put(techList.get(2), R.drawable.surprised_q);
-        map.put(techList.get(3), R.drawable.angry_q);
+        map.put(techList.get(0), happy_img[num]);
+        map.put(techList.get(1), sad_img[num2]);
+        map.put(techList.get(2), surprised_img[num3]);
+        map.put(techList.get(3), angry_img[num4]);
 
         Collections.shuffle(techList);
         millisUntilFinished = 10000;
@@ -109,6 +131,20 @@ public class Level2 extends AppCompatActivity {
                 nextQuestion();
             }
         });
+
+//        for(int i=0; i<=4; i++) {
+//            btns[i] = (Button)findViewById(btn_id[i]);
+//            String b = btns[i].getText().toString();
+//            if(b == "기쁨"){
+//                btns[i].setBackground(ContextCompat.getDrawable(this, R.drawable.happy_border));
+//            } else if (b == "슬픔") {
+//                btns[i].setBackground(ContextCompat.getDrawable(this, R.drawable.sad_border));
+//            } else if (b == "화남") {
+//                btns[i].setBackground(ContextCompat.getDrawable(this, R.drawable.angry_border));
+//            } else if(b == "놀람"){
+//                btns[i].setBackground(ContextCompat.getDrawable(this, R.drawable.suprised_border));
+//            }
+//        }
     }
 
     // 문제 생성 코드
@@ -145,7 +181,7 @@ public class Level2 extends AppCompatActivity {
     }
 
     private void startGame() {
-        nextButton.setVisibility(View.INVISIBLE);
+        //nextButton.setVisibility(View.INVISIBLE);
         selected=0;
         // Initialize millisUntilFinished with 10 seconds.
         millisUntilFinished = 10000;
@@ -199,7 +235,7 @@ public class Level2 extends AppCompatActivity {
     }
 
     public void nextQuestion() {
-        nextButton.setVisibility(View.INVISIBLE);
+        //nextButton.setVisibility(View.INVISIBLE);
         btn1.setTextColor(Color.BLACK);
         btn2.setTextColor(Color.BLACK);
         btn3.setTextColor(Color.BLACK);
@@ -266,7 +302,7 @@ public class Level2 extends AppCompatActivity {
         // Compare answer and correctAnswer, that is, the answer selected by the user
         // and the correct answer for this question.
         if(answer.equals(correctAnswer)) {
-            nextButton.setVisibility(View.INVISIBLE);
+            //nextButton.setVisibility(View.INVISIBLE);
             ((Button)view).setTextColor(Color.WHITE);
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
             // If true, the user has selected the right answer. So, increment points.
@@ -284,7 +320,7 @@ public class Level2 extends AppCompatActivity {
         }else {
             //다음 버튼 보이도록
             ((Button)view).setTextColor(Color.WHITE);
-            nextButton.setVisibility(View.VISIBLE);
+           //nextButton.setVisibility(View.VISIBLE);
 
             //맞는 답 배경 다르게 변경
             if (btn1.getText() == correctAnswer){
@@ -303,15 +339,22 @@ public class Level2 extends AppCompatActivity {
             //틀린 답 배경 다르게 설정
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.uncorrect_option_border_bg));
 
-            //정답일 경우 자동으로 다음문제로 넘어감
-            if (selected != 0) {
-                new Handler().postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        nextQuestion(); //딜레이 후 시작할 코드 작성
-                    }
-                }, 2000);
-            }
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    nextQuestion(); //딜레이 후 시작할 코드 작성
+                }
+            }, 2000);
+
+//            //정답일 경우 자동으로 다음문제로 넘어감
+//            if (selected != 0) {
+//                new Handler().postDelayed(new Runnable() {
+//                    @Override
+//                    public void run() {
+//                        nextQuestion(); //딜레이 후 시작할 코드 작성
+//                    }
+//                }, 2000);
+//            }
         }
     }
 }

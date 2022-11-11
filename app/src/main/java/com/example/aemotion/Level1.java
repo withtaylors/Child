@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,8 +21,9 @@ import java.util.List;
 public class Level1 extends AppCompatActivity {
 
     int CheckON2;
+    Button backbtn;
 
-    private View 	decorView;
+    private View decorView;
     private int	uiOption;
 
     @Override
@@ -46,13 +48,18 @@ public class Level1 extends AppCompatActivity {
        TextView image_1 = findViewById(R.id.image_1);
        TextView image_2 = findViewById(R.id.image_2);
        TextView image_3 = findViewById(R.id.image_3);
-        TextView image_4 = findViewById(R.id.image_4);
+       TextView image_4 = findViewById(R.id.image_4);
 
+        Button backbtn = findViewById(R.id.backbtn);
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), Home.class);
+                startActivity(intent);
+            }
+        });
 
        /* ObjectAnimator animator = ObjectAnimator.ofFloat(image_1, "rotationY", 360);
-
-
-
         animator.setDuration(600);
 */
 
@@ -67,9 +74,7 @@ public class Level1 extends AppCompatActivity {
                 VO.setCheckON2(CheckON2);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
-
                 }
-
         });
 
         image_2.setOnClickListener(new View.OnClickListener() {
@@ -79,8 +84,6 @@ public class Level1 extends AppCompatActivity {
                 VO.setCheckON2(CheckON2);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
-
-
             }
         });
         image_3.setOnClickListener(new View.OnClickListener() {
