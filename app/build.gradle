@@ -6,6 +6,7 @@ android {
     namespace 'com.example.aemotion'
     compileSdk 32
 
+
     defaultConfig {
         applicationId "com.example.aemotion"
         minSdk 29
@@ -35,6 +36,8 @@ android {
 dependencies {
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'nl.dionsegijn:konfetti-xml:2.0.2'
+    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     implementation 'com.soundcloud.android:android-crop:1.0.1@aar'
     implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'

@@ -65,7 +65,7 @@ public class Level1 extends AppCompatActivity {
             public void onClick(View view) {
                CheckON2=1;
                 VO.setCheckON2(CheckON2);
-                Intent intent = new Intent(getApplicationContext(), Level1_2.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
 
                 }
@@ -77,7 +77,7 @@ public class Level1 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON2=2;
                 VO.setCheckON2(CheckON2);
-                Intent intent = new Intent(getApplicationContext(), Level1_2.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
 
 
@@ -88,7 +88,7 @@ public class Level1 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON2=3;
                 VO.setCheckON2(CheckON2);
-                Intent intent = new Intent(getApplicationContext(), Level1_2.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
             }
         });
@@ -97,7 +97,7 @@ public class Level1 extends AppCompatActivity {
             public void onClick(View view) {
                 CheckON2=4;
                 VO.setCheckON2(CheckON2);
-                Intent intent = new Intent(getApplicationContext(), Level1_2.class);
+                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
 
             }
