@@ -36,7 +36,7 @@ public class Level2 extends AppCompatActivity {
     ArrayList<String> techList = new ArrayList<>();
 
     int index, points, selected=0;
-    Button btn1, btn2, btn3, btn4, nextButton, btn_home;
+    Button btn1, btn2, btn3, btn4, nextButton;
     TextView tvPoints;
 
     CountDownTimer countDownTimer;
@@ -68,15 +68,7 @@ public class Level2 extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        Button btn_home = findViewById(R.id.btn_home);
-        btn_home.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Home.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
-                startActivity(intent);
-            }
-        });
+
 
         Timer = findViewById(R.id.Timer);
         ivShowImage = findViewById(R.id.ivShowImage);

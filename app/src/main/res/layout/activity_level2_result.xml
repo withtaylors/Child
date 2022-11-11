@@ -126,42 +126,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
-            <com.sackcentury.shinebuttonlib.ShineButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:id="@+id/star1"
-                app:siShape="@raw/star"/>
-            <com.sackcentury.shinebuttonlib.ShineButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:src="@android:color/darker_gray"
-                android:id="@+id/po_image1"
-                app:btn_color="@android:color/darker_gray"
-                app:btn_fill_color="@android:color/holo_green_dark"
-                app:allow_random_color="false"
-                app:siShape="@drawable/ic_baseline_sentiment_very_satisfied_24"/>
-            <com.sackcentury.shinebuttonlib.ShineButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:src="@android:color/darker_gray"
-                android:id="@+id/po_image4"
-                app:btn_color="@android:color/darker_gray"
-                app:btn_fill_color="@android:color/holo_green_dark"
-                app:allow_random_color="false"
-                app:siShape="@drawable/ic_baseline_sentiment_very_dissatisfied_24"/>
-            <com.sackcentury.shinebuttonlib.ShineButton
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_centerInParent="true"
-                android:src="@android:color/darker_gray"
-                android:id="@+id/po_image3"
-                app:btn_color="@android:color/darker_gray"
-                app:btn_fill_color="@android:color/holo_green_dark"
-                app:allow_random_color="false"
-                app:siShape="@drawable/ic_outline_sentiment_very_dissatisfied_24"/>
+
         </LinearLayout>
         <Button
             android:id="@+id/btn_home"
