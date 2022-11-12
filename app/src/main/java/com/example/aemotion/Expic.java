@@ -39,7 +39,7 @@ public class Expic extends AppCompatActivity {
 
         decorView.setSystemUiVisibility( uiOption );
 
-        final TextView mSwitcher = (TextView) findViewById(R.id.h_message); mSwitcher.setText("old text");
+        final TextView mSwitcher = (TextView) findViewById(R.id.h_message); mSwitcher.setText("예시표정을 잘 따라해보세요!");
 
         final Animation in = new AlphaAnimation(0.0f, 1.0f);
         in.setDuration(3000);

@@ -1,6 +1,7 @@
 package com.example.aemotion;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -22,11 +23,10 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     int CheckON2;
-
-
+    private View decorView;
+    private int   uiOption;
 
     private ActivityMainBinding mBinding;
-
     private Handler sliderHandler = new Handler();
 
     @Override
@@ -37,6 +37,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(mBinding.getRoot());
         CheckON2= VO.getCheckON2();
 
+        decorView = getWindow().getDecorView();
+        uiOption = getWindow().getDecorView().getSystemUiVisibility();
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH )
+            uiOption |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN )
+            uiOption |= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
+            uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+
+        decorView.setSystemUiVisibility( uiOption );
 
         mBinding.exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -48,17 +58,17 @@ public class MainActivity extends AppCompatActivity {
 
         List<String> sliderItems = new ArrayList<>();
         if(CheckON2==1){
-        sliderItems.add("https://cdn.pixabay.com/photo/2016/03/12/21/03/girl-1252739_960_720.jpg");
-        sliderItems.add("https://cdn.pixabay.com/photo/2016/11/29/04/59/woman-1867431_960_720.jpg");
-        sliderItems.add("https://cdn.pixabay.com/photo/2017/01/09/11/23/kids-1966202_960_720.jpg");
-        sliderItems.add("https://cdn.pixabay.com/photo/2016/12/03/20/06/girl-1880482_960_720.jpg");
-        sliderItems.add("https://cdn.pixabay.com/photo/2020/12/09/04/00/baby-5816350_960_720.jpg");
-        sliderItems.add("https://cdn.pixabay.com/photo/2018/09/12/15/33/smile-3672452_960_720.jpg");
-        sliderItems.add("https://cdn.pixabay.com/photo/2020/07/15/13/19/baby-5407690_960_720.jpg");
-        sliderItems.add("https://cdn.pixabay.com/photo/2016/11/29/03/35/girl-1867092_960_720.jpg");
-        sliderItems.add("https://cdn.pixabay.com/photo/2016/09/24/03/20/man-1690965_960_720.jpg");
-        sliderItems.add("https://cdn.pixabay.com/photo/2016/11/23/18/42/boy-1854308_960_720.jpg");
-        sliderItems.add("https://cdn.pixabay.com/photo/2018/03/04/23/37/child-3199624_960_720.jpg"); }
+            sliderItems.add("https://cdn.pixabay.com/photo/2016/03/12/21/03/girl-1252739_960_720.jpg");
+            sliderItems.add("https://cdn.pixabay.com/photo/2016/11/29/04/59/woman-1867431_960_720.jpg");
+            sliderItems.add("https://cdn.pixabay.com/photo/2017/01/09/11/23/kids-1966202_960_720.jpg");
+            sliderItems.add("https://cdn.pixabay.com/photo/2016/12/03/20/06/girl-1880482_960_720.jpg");
+            sliderItems.add("https://cdn.pixabay.com/photo/2020/12/09/04/00/baby-5816350_960_720.jpg");
+            sliderItems.add("https://cdn.pixabay.com/photo/2018/09/12/15/33/smile-3672452_960_720.jpg");
+            sliderItems.add("https://cdn.pixabay.com/photo/2020/07/15/13/19/baby-5407690_960_720.jpg");
+            sliderItems.add("https://cdn.pixabay.com/photo/2016/11/29/03/35/girl-1867092_960_720.jpg");
+            sliderItems.add("https://cdn.pixabay.com/photo/2016/09/24/03/20/man-1690965_960_720.jpg");
+            sliderItems.add("https://cdn.pixabay.com/photo/2016/11/23/18/42/boy-1854308_960_720.jpg");
+            sliderItems.add("https://cdn.pixabay.com/photo/2018/03/04/23/37/child-3199624_960_720.jpg"); }
         if(CheckON2==2){
             sliderItems.add("https://cdn.pixabay.com/photo/2018/04/30/17/45/baby-3363419_960_720.jpg");
             sliderItems.add("https://cdn.pixabay.com/photo/2020/04/24/19/48/baby-5088496_960_720.jpg");
@@ -100,7 +110,6 @@ public class MainActivity extends AppCompatActivity {
             sliderItems.add("https://cdn.pixabay.com/photo/2014/10/20/11/18/woman-495124_960_720.jpg");
             sliderItems.add("https://cdn.pixabay.com/photo/2016/12/09/12/50/kids-1894804_960_720.jpg");
             sliderItems.add("https://cdn.pixabay.com/photo/2020/08/31/00/29/man-5531026_960_720.jpg");
-
         }
         Collections.shuffle(sliderItems);
 

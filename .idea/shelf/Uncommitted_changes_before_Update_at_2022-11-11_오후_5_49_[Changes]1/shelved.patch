@@ -1,0 +1,226 @@
+Index: app/src/main/java/com/example/aemotion/Fragment_5.java
+===================================================================
+diff --git a/app/src/main/java/com/example/aemotion/Fragment_5.java b/app/src/main/java/com/example/aemotion/Fragment_5.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/aemotion/Fragment_5.java	
++++ /dev/null	
+@@ -1,41 +0,0 @@
+-package com.example.aemotion;
+-
+-import android.os.Bundle;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.TextView;
+-
+-import androidx.fragment.app.Fragment;
+-
+-import com.example.aemotion.R;
+-
+-import org.w3c.dom.Text;
+-
+-public class Fragment_5 extends Fragment {
+-
+-    TextView five;
+-    int CheckON2, CheckON3;
+-
+-    @Override
+-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-                             Bundle savedInstanceState) {
+-        ViewGroup rootView = (ViewGroup) inflater.inflate(
+-                R.layout.frame_5, container, false);
+-
+-        CheckON2= VO.getCheckON2();
+-        five = (TextView) rootView.findViewById(R.id.five);
+-
+-        if(CheckON2==2) {
+-            five.setBackgroundResource(R.drawable.sad_learn5);
+-        }
+-        else if(CheckON2==3){
+-            five.setBackgroundResource(R.drawable.surprise_learn5);
+-        }
+-        else if (CheckON2==4){
+-            five.setBackgroundResource(R.drawable.angry_learn5);
+-        }
+-        return rootView;
+-    }
+-
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/example/aemotion/Fragment_4.java
+===================================================================
+diff --git a/app/src/main/java/com/example/aemotion/Fragment_4.java b/app/src/main/java/com/example/aemotion/Fragment_4.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/aemotion/Fragment_4.java	
++++ /dev/null	
+@@ -1,37 +0,0 @@
+-package com.example.aemotion;
+-
+-import android.os.Bundle;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.TextView;
+-
+-import androidx.fragment.app.Fragment;
+-
+-public class Fragment_4 extends Fragment {
+-
+-    TextView four;
+-    int CheckON2;
+-
+-    @Override
+-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-                             Bundle savedInstanceState) {
+-        ViewGroup rootView = (ViewGroup) inflater.inflate(
+-                R.layout.frame_4, container, false);
+-
+-        CheckON2= VO.getCheckON2();
+-        four = (TextView) rootView.findViewById(R.id.four);
+-
+-        if(CheckON2==2) {
+-            four.setBackgroundResource(R.drawable.sad_learn4);
+-        }
+-        else if(CheckON2==3){
+-            four.setBackgroundResource(R.drawable.surprise_learn4);
+-        }
+-        else if (CheckON2==4){
+-            four.setBackgroundResource(R.drawable.angry_learn4);
+-        }
+-        return rootView;
+-    }
+-
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/example/aemotion/Fragment_3.java
+===================================================================
+diff --git a/app/src/main/java/com/example/aemotion/Fragment_3.java b/app/src/main/java/com/example/aemotion/Fragment_3.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/aemotion/Fragment_3.java	
++++ /dev/null	
+@@ -1,36 +0,0 @@
+-package com.example.aemotion;
+-
+-import android.os.Bundle;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.TextView;
+-
+-import androidx.fragment.app.Fragment;
+-
+-public class Fragment_3 extends Fragment {
+-    TextView three;
+-    int CheckON2;
+-
+-    @Override
+-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-                             Bundle savedInstanceState) {
+-
+-        ViewGroup rootView = (ViewGroup) inflater.inflate(
+-                R.layout.frame_3, container, false);
+-        CheckON2= VO.getCheckON2();
+-        three = (TextView) rootView.findViewById(R.id.three);
+-
+-        if(CheckON2==2) {
+-            three.setBackgroundResource(R.drawable.sad_learn3);
+-        }
+-        else if(CheckON2==3){
+-            three.setBackgroundResource(R.drawable.surprise_learn3);
+-        }
+-        else if (CheckON2==4){
+-            three.setBackgroundResource(R.drawable.angry_learn3);
+-        }
+-        return rootView;
+-    }
+-
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/example/aemotion/Fragment_2.java
+===================================================================
+diff --git a/app/src/main/java/com/example/aemotion/Fragment_2.java b/app/src/main/java/com/example/aemotion/Fragment_2.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/aemotion/Fragment_2.java	
++++ /dev/null	
+@@ -1,35 +0,0 @@
+-package com.example.aemotion;
+-
+-import android.os.Bundle;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.TextView;
+-
+-import androidx.fragment.app.Fragment;
+-
+-public class Fragment_2 extends Fragment {
+-
+-    TextView two;
+-    int CheckON2;
+-
+-    @Override
+-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-                             Bundle savedInstanceState) {
+-        ViewGroup rootView = (ViewGroup) inflater.inflate(
+-                R.layout.frame_2, container, false);
+-        CheckON2= VO.getCheckON2();
+-        two = (TextView) rootView.findViewById(R.id.two);
+-        if(CheckON2==2) {
+-            two.setBackgroundResource(R.drawable.sad_learn2);
+-        }
+-        else if(CheckON2==3){
+-            two.setBackgroundResource(R.drawable.surprise_learn2);
+-        }
+-        else if (CheckON2==4){
+-            two.setBackgroundResource(R.drawable.angry_learn2);
+-        }
+-        return rootView;
+-    }
+-
+-}
+\ No newline at end of file
+Index: app/src/main/java/com/example/aemotion/Fragment_1.java
+===================================================================
+diff --git a/app/src/main/java/com/example/aemotion/Fragment_1.java b/app/src/main/java/com/example/aemotion/Fragment_1.java
+deleted file mode 100644
+--- a/app/src/main/java/com/example/aemotion/Fragment_1.java	
++++ /dev/null	
+@@ -1,37 +0,0 @@
+-package com.example.aemotion;
+-
+-import android.os.Bundle;
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.TextView;
+-
+-import androidx.fragment.app.Fragment;
+-
+-public class Fragment_1 extends Fragment {
+-
+-    TextView one;
+-    int CheckON2;
+-
+-    @Override
+-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+-                             Bundle savedInstanceState) {
+-        ViewGroup rootView = (ViewGroup) inflater.inflate(
+-                R.layout.frame_1, container, false);
+-        CheckON2= VO.getCheckON2();
+-
+-        one = (TextView) rootView.findViewById(R.id.one);
+-
+-        if(CheckON2==2) {
+-            one.setBackgroundResource(R.drawable.sad_learn);
+-        }
+-        else if(CheckON2==3){
+-            one.setBackgroundResource(R.drawable.surprise_learn);
+-        }
+-        else if(CheckON2==4){
+-            one.setBackgroundResource(R.drawable.angry_learn);
+-        }
+-        return rootView;
+-    }
+-
+-}
+\ No newline at end of file

@@ -35,9 +35,9 @@ public class Level2 extends AppCompatActivity {
     HashMap<String, Integer> map = new HashMap<>();
     ArrayList<String> techList = new ArrayList<>();
 
-    int index, points, selected=0;
+    int index, points, selected=0, question;
     Button btn1, btn2, btn3, btn4, nextButton, btn_home;
-    TextView tvPoints;
+    //TextView tvPoints;
 
     CountDownTimer countDownTimer;
 
@@ -85,7 +85,7 @@ public class Level2 extends AppCompatActivity {
         btn3 = findViewById(R.id.option_three);
         btn4 = findViewById(R.id.option_four);
         nextButton = findViewById(R.id.nextQuestion);
-        tvPoints = findViewById(R.id.tv_points);
+        //tvPoints = findViewById(R.id.tv_points);
         pb_quiz_progress = findViewById(R.id.pb_quiz_progress);
         // Initialize index with 0
         index = 0;
@@ -114,6 +114,7 @@ public class Level2 extends AppCompatActivity {
         Collections.shuffle(techList);
         millisUntilFinished = 10000;
         points = 0;
+        question = 0;
         startGame();
 
         //다음버튼은 초기에 보이지 않게
@@ -188,8 +189,8 @@ public class Level2 extends AppCompatActivity {
         // Set the TextView for Timer.
         //Timer.setText("" + (millisUntilFinished / 1000) + "s");
         // Set the TextView for points.
-        tvPoints.setText(points + " / " + techList.size());
-
+        //tvPoints.setText(points + " / " + techList.size());
+        //tvPoints.setText(question+ " / " + techList.size());
         generateQuestions(index);
 
         countDownTimer = new CountDownTimer(millisUntilFinished, 1000) {
@@ -310,7 +311,8 @@ public class Level2 extends AppCompatActivity {
 //            // Here we are incrementing points by 1 here, but, you can increment by any number
 //            // you want.
 //            // Update the TextViews for points and result
-            tvPoints.setText(points + " / " + techList.size());
+            //tvPoints.setText(points + " / " + techList.size());
+            //tvPoints.setText(question);
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {

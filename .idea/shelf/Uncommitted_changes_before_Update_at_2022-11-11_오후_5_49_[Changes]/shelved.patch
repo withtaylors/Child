@@ -1,0 +1,17 @@
+Index: app/src/main/java/com/example/aemotion/MyAdapter.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.aemotion;\r\n\r\nimport androidx.annotation.NonNull;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.fragment.app.FragmentActivity;\r\nimport androidx.viewpager2.adapter.FragmentStateAdapter;\r\n\r\nimport com.example.aemotion.Fragment_1;\r\n\r\npublic class MyAdapter extends FragmentStateAdapter {\r\n\r\n    public int mCount;\r\n\r\n    public MyAdapter(FragmentActivity fa, int count) {\r\n        super(fa);\r\n        mCount = count;\r\n    }\r\n\r\n    @NonNull\r\n    @Override\r\n    public Fragment createFragment(int position) {\r\n        int index = getRealPosition(position);\r\n\r\n        if(index==0) {\r\n            return new Fragment_1();\r\n        }\r\n        else if(index==1) {\r\n            return new Fragment_2();\r\n        }\r\n        else if(index==2) {\r\n            return new Fragment_3();\r\n        }\r\n        else if(index==3) {\r\n            return new Fragment_4();\r\n        }\r\n        else {\r\n            return new Fragment_5();\r\n        }\r\n    }\r\n\r\n    @Override\r\n    public int getItemCount() {\r\n        return 3000;\r\n    }\r\n\r\n    public int getRealPosition(int position) { return position % mCount; }\r\n\r\n}
+===================================================================
+diff --git a/app/src/main/java/com/example/aemotion/MyAdapter.java b/app/src/main/java/com/example/aemotion/MyAdapter.java
+--- a/app/src/main/java/com/example/aemotion/MyAdapter.java	
++++ b/app/src/main/java/com/example/aemotion/MyAdapter.java	
+@@ -5,8 +5,6 @@
+ import androidx.fragment.app.FragmentActivity;
+ import androidx.viewpager2.adapter.FragmentStateAdapter;
+ 
+-import com.example.aemotion.Fragment_1;
+-
+ public class MyAdapter extends FragmentStateAdapter {
+ 
+     public int mCount;

@@ -16,6 +16,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:id="@+id/Timer"
+            android:text="10초이내에 답을 선택하세요!"
+            android:fontFamily="@font/font"
+            android:textSize="15sp" />
         <com.google.android.material.progressindicator.LinearProgressIndicator
             android:id="@+id/pb_quiz_progress"
             android:layout_width="match_parent"
@@ -30,51 +39,18 @@
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="25dp"
-            tools:progress="5" />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Timer"
-            android:layout_marginLeft="5dp"
-            android:text=""
-            android:textSize="24sp" />
-        <TextView
-            android:id="@+id/tv_points_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/pb_quiz_progress"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:layout_marginTop="10dp"
-            android:fontFamily="@font/font"
-            android:text="SCORE"
-            android:textColor="#4E4E4D"
-            android:textSize="13sp" />
-
-        <TextView
-            android:id="@+id/tv_points"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_points_text"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="30dp"
-            android:fontFamily="@font/font"
-            android:text="0/4"
-            android:textColor="#4E4E4D"
-            android:textSize="20sp" />
-
+            android:layout_marginTop="50dp"
+            tools:progress="5"/>
         <androidx.cardview.widget.CardView
             android:id="@+id/cv_question"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardCornerRadius="25dp"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="25dp"
             android:layout_marginStart="30dp"
             android:layout_marginEnd="30dp"
-            android:layout_below="@+id/tv_points"
+            android:layout_below="@+id/pb_quiz_progress"
             app:cardElevation="5dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -85,7 +61,7 @@
                     android:id="@+id/tv_question"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="이 인물은 무슨 감정을 느끼고 있나요?"
+                    android:text="Q) 이 인물은 무슨 감정을 느끼고 있나요?"
                     android:gravity="center"
                     android:fontFamily="@font/font"
                     android:layout_marginTop="5dp"
@@ -93,7 +69,7 @@
                     android:layout_marginEnd="15dp"
                     android:layout_marginBottom="20dp"
                     android:textColor="#363A43"
-                    android:textSize="17sp"
+                    android:textSize="18sp"
                     />
                 <androidx.cardview.widget.CardView
                     android:layout_width="wrap_content"
@@ -118,9 +94,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/cv_question"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp"
-            app:cardCornerRadius="25dp"
-            app:cardElevation="5dp">
+            android:layout_marginTop="28dp">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -131,8 +105,8 @@
                     android:orientation="horizontal">
                     <Button
                         android:id="@+id/option_one"
-                        android:layout_width="130dp"
-                        android:layout_height="120dp"
+                        android:layout_width="160dp"
+                        android:layout_height="140dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
@@ -141,13 +115,13 @@
                         android:fontFamily="@font/font"
                         android:onClick="answerSelected"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="22sp"
                         tools:background="@drawable/uncorrect_option_border_bg"
-                        tools:text="France" />
+                        tools:text="기쁨" />
                     <Button
                         android:id="@+id/option_two"
-                        android:layout_width="130dp"
-                        android:layout_height="120dp"
+                        android:layout_width="160dp"
+                        android:layout_height="140dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginBottom="10dp"
@@ -158,20 +132,19 @@
                         android:onClick="answerSelected"
                         android:padding="10dp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
+                        android:textSize="22sp"
                         tools:background="@drawable/correct_option_border_bg"
-                        tools:text="India" />
+                        tools:text="슬픔" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
                     <Button
                         android:id="@+id/option_three"
-                        android:layout_width="130dp"
-                        android:layout_height="120dp"
+                        android:layout_width="160dp"
+                        android:layout_height="140dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="5dp"
@@ -182,13 +155,13 @@
                         android:onClick="answerSelected"
                         android:padding="10dp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        tools:text="Lebanon" />
+                        android:textSize="22sp"
+                        tools:text="놀람" />
 
                     <Button
                         android:id="@+id/option_four"
-                        android:layout_width="130dp"
-                        android:layout_height="120dp"
+                        android:layout_width="160dp"
+                        android:layout_height="140dp"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="5dp"
                         android:layout_marginBottom="10dp"
@@ -199,8 +172,8 @@
                         android:onClick="answerSelected"
                         android:padding="10dp"
                         android:textColor="@color/black"
-                        android:textSize="20sp"
-                        tools:text="Iran" />
+                        android:textSize="22sp"
+                        tools:text="화남" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -219,7 +192,8 @@
             android:text="취소"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"/>
         <Button
             android:id="@+id/nextQuestion"
             android:layout_width="100dp"
@@ -233,7 +207,8 @@
             android:text="다음"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:visibility="gone"/>
     </RelativeLayout>
 
 </FrameLayout>
