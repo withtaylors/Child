@@ -21,7 +21,7 @@ import java.util.List;
 public class Level1 extends AppCompatActivity {
 
     int CheckON2;
-    Button backbtn;
+
 
     private View decorView;
     private int	uiOption;
