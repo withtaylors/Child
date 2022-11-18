@@ -28,28 +28,32 @@
         android:layout_height="match_parent" />
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
+        android:layout_gravity="center"
         android:layout_margin="15dp">
         <Button
             android:id="@+id/back"
-            android:layout_width="165dp"
+            android:layout_marginLeft="8dp"
+            android:layout_width="150dp"
             android:layout_height="40dp"
             android:layout_marginTop="650dp"
-            android:background="@drawable/gradiation_btn2"
+            android:textAlignment="center"
+            android:background="@drawable/button_background"
             android:fontFamily="@font/font"
             android:text=" 다른 표정 지어보기"
             android:textColor="@color/white"
             android:textStyle="bold" />
         <Button
             android:id="@+id/home"
-            android:layout_width="match_parent"
+            android:layout_width="150dp"
             android:layout_marginHorizontal="15dp"
             android:layout_height="40dp"
             android:layout_marginTop="650dp"
-            android:background="@drawable/gradiation_btn2"
+            android:background="@drawable/btn_background2"
             android:fontFamily="@font/font"
             android:text="홈으로 돌아가기"
+            android:textAlignment="center"
             android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
