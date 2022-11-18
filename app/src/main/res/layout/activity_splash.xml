@@ -16,13 +16,14 @@
         android:id="@+id/splash"
         android:layout_gravity="center"
         android:layout_marginTop="250dp"
+        android:adjustViewBounds="true"
         android:background="@drawable/ae_som"/>
     <TextView
         android:layout_width="130dp"
         android:layout_height="80dp"
         android:layout_below="@+id/splash"
-        android:gravity="center"
-        android:layout_marginLeft="130dp"
+        android:gravity="center_horizontal"
         android:id="@+id/splash_letter"
+        android:layout_gravity="center"
         android:background="@drawable/ae_letter"/>
 </LinearLayout>

@@ -9,18 +9,23 @@
 
     <ImageView
         android:id="@+id/happy"
-        android:layout_width="280dp"
-        android:layout_height="470dp"
+        android:layout_width="260dp"
+        android:layout_height="260dp"
+        android:adjustViewBounds="true"
         android:layout_marginLeft="60dp"
-        android:layout_marginTop="100dp" />
+        android:layout_marginTop="185dp" />
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="410dp"
+        android:layout_width="match_parent"
         android:layout_height="400dp"
+        android:adjustViewBounds="true"
         android:layout_marginTop="150dp"
         android:background="@drawable/happy_b"
         android:layout_marginBottom="100dp" />
-
+    <nl.dionsegijn.konfetti.xml.KonfettiView
+        android:id="@+id/konfettiView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,9 +53,4 @@
             android:textColor="@color/white"
             android:textStyle="bold" />
     </LinearLayout>
-
-    <nl.dionsegijn.konfetti.xml.KonfettiView
-        android:id="@+id/konfettiView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
 </FrameLayout>

@@ -46,6 +46,7 @@ public class Home extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), Level1.class);
                 startActivity(intent);
+
             }
         });
 
@@ -57,6 +58,7 @@ public class Home extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), Level2.class);
                 startActivity(intent);
+
             }
         });
 
@@ -69,6 +71,7 @@ public class Home extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), Level3.class);
                 startActivity(intent);
+
             }
         });
     }
