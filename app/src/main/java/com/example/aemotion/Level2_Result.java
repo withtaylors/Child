@@ -6,6 +6,7 @@ import android.animation.Animator;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -57,6 +58,10 @@ public class Level2_Result extends AppCompatActivity {
             }
         });
 
+        MediaPlayer mediaPlayer2;
+
+        mediaPlayer2 = MediaPlayer.create(this, R.raw.shortstar);
+        mediaPlayer2.start();
         //별
         LottieAnimationView animationView1 = findViewById(R.id.star1);
         LottieAnimationView animationView2 = findViewById(R.id.star2);

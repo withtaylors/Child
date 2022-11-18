@@ -14,10 +14,10 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
-import android.view.View;
 import android.widget.ImageView;
 
 import java.util.concurrent.TimeUnit;
@@ -31,9 +31,6 @@ import nl.dionsegijn.konfetti.core.models.Size;
 import nl.dionsegijn.konfetti.xml.KonfettiView;
 
 public class Surprised extends AppCompatActivity {
-
-    private View decorView;
-    private int	uiOption;
     private KonfettiView konfettiView = null;
     private Shape.DrawableShape drawableShape = null;
 
@@ -42,16 +39,19 @@ public class Surprised extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_surprised);
 
-        decorView = getWindow().getDecorView();
-        uiOption = getWindow().getDecorView().getSystemUiVisibility();
-        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH )
-            uiOption |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
-        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN )
-            uiOption |= View.SYSTEM_UI_FLAG_FULLSCREEN;
-        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
-            uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+        //효과음
+        MediaPlayer mediaPlayer;
+        MediaPlayer mediaPlayer2;
+        mediaPlayer = MediaPlayer.create(this, R.raw.say);
 
-        decorView.setSystemUiVisibility( uiOption );
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable()  {
+            public void run() {
+                mediaPlayer.start();
+            }
+        }, 3000);
+        mediaPlayer2 = MediaPlayer.create(this, R.raw.clap);
+        mediaPlayer2.start();
 
         SharedPreferences sharedPreferences = getSharedPreferences("MY", Context.MODE_PRIVATE );
         ImageView surprise = findViewById(R.id.surprise);
@@ -60,8 +60,8 @@ public class Surprised extends AppCompatActivity {
         byte[] encodeByte = Base64.decode(temp1, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
 
-        //Bitmap a = getRoundedCroppedBitmap(bitmap);
-        surprise.setImageBitmap(bitmap);
+        Bitmap a = getRoundedCroppedBitmap(bitmap);
+        surprise.setImageBitmap(a);
 
         final Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), android.R.drawable.btn_star);
         Shape.DrawableShape drawableShape = new Shape.DrawableShape(drawable, true);

@@ -6,6 +6,7 @@ import androidx.core.content.ContextCompat;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -303,6 +304,9 @@ public class Level2 extends AppCompatActivity {
         // Compare answer and correctAnswer, that is, the answer selected by the user
         // and the correct answer for this question.
         if(answer.equals(correctAnswer)) {
+            MediaPlayer mediaPlayer2;
+            mediaPlayer2 = MediaPlayer.create(this, R.raw.right);
+            mediaPlayer2.start();
             //nextButton.setVisibility(View.INVISIBLE);
             ((Button)view).setTextColor(Color.WHITE);
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.correct_option_border_bg));
@@ -340,6 +344,10 @@ public class Level2 extends AppCompatActivity {
             }
             //틀린 답 배경 다르게 설정
             view.setBackground(ContextCompat.getDrawable(this, R.drawable.uncorrect_option_border_bg));
+
+            MediaPlayer mediaPlayer;
+            mediaPlayer = MediaPlayer.create(this, R.raw.wrong);
+            mediaPlayer.start();
 
             new Handler().postDelayed(new Runnable() {
                 @Override

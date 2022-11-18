@@ -19,6 +19,7 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.BitmapDrawable;
+import android.media.MediaPlayer;
 import android.media.ThumbnailUtils;
 import android.net.Uri;
 import android.os.Build;
@@ -223,12 +224,16 @@ public class Camera extends AppCompatActivity {
             //next.setVisibility(View.INVISIBLE);
             next.setVisibility(View.VISIBLE);
 
+            MediaPlayer mediaPlayer2;
+            mediaPlayer2 = MediaPlayer.create(this, R.raw.uhh);
+
             if (CheckON == 1){
                 if(classes[maxPos] == "happy"){
                     result.setText("기쁜 표정을 잘 지었어요!");
                     next.setVisibility(View.VISIBLE);
                 }
                 else{
+                    mediaPlayer2.start();
                     result.setText("기쁜 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
                 }
             }else if (CheckON == 2) {
@@ -236,6 +241,7 @@ public class Camera extends AppCompatActivity {
                     result.setText("슬픈 표정을 잘 지었어요!");
                     next.setVisibility(View.VISIBLE);
                 } else {
+                    mediaPlayer2.start();
                     result.setText("슬픈 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
                 }
             }else if (CheckON == 3) {
@@ -243,6 +249,7 @@ public class Camera extends AppCompatActivity {
                     result.setText("놀란 표정을 잘 지었어요!");
                     next.setVisibility(View.VISIBLE);
                 } else {
+                    mediaPlayer2.start();
                     result.setText("놀란 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
                 }
             }else if (CheckON == 4) {
@@ -250,6 +257,7 @@ public class Camera extends AppCompatActivity {
                     result.setText("화난 표정을 잘 지었어요!");
                     next.setVisibility(View.VISIBLE);
                 } else {
+                    mediaPlayer2.start();
                     result.setText("화난 표정이"+" "+ str+ "\n" +"표정을 다시 한번 지어볼까요?");
                 }
             }

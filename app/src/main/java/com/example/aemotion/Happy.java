@@ -1,9 +1,11 @@
 package com.example.aemotion;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -15,10 +17,14 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.IBinder;
 import android.util.Base64;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.Arrays;
@@ -56,6 +62,28 @@ public class Happy extends AppCompatActivity {
 
         decorView.setSystemUiVisibility( uiOption );
 
+
+
+        MediaPlayer mediaPlayer;
+        MediaPlayer mediaPlayer2;
+        mediaPlayer = MediaPlayer.create(this, R.raw.say);
+
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable()  {
+            public void run() {
+                mediaPlayer.start();
+            }
+        }, 3000);
+
+
+        mediaPlayer2 = MediaPlayer.create(this, R.raw.clap);
+        mediaPlayer2.start();
+
+
+
+
+
+
         SharedPreferences sharedPreferences = getSharedPreferences("MY", Context.MODE_PRIVATE );
         ImageView happy = findViewById(R.id.happy);
 
@@ -80,7 +108,27 @@ public class Happy extends AppCompatActivity {
                 .position(0.0, 0.0, 1.0, 0.0)
                 .build();
         konfettiView.start(party);
+
+        Button back = findViewById(R.id.back);
+        Button home = findViewById(R.id.home);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Happy.this, Level3.class);
+                startActivity(intent);
+            }
+        });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Happy.this, Home.class);
+                startActivity(intent);
+            }
+        });
     }
+
+
 
     //사진 동그라미 테두리로 나오게하는 코드
     private Bitmap getRoundedCroppedBitmap(Bitmap image) {
