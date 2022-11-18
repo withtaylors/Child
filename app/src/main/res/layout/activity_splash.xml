@@ -22,7 +22,7 @@
         android:layout_height="80dp"
         android:layout_below="@+id/splash"
         android:gravity="center"
-        android:layout_marginLeft="115dp"
+        android:layout_marginLeft="130dp"
         android:id="@+id/splash_letter"
         android:background="@drawable/ae_letter"/>
 </LinearLayout>

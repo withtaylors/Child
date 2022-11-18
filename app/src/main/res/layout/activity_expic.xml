@@ -16,7 +16,6 @@
         android:textAlignment="center"
         android:fontFamily="@font/font"
         android:textColor="@color/next"/>
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cv_question"
         android:layout_width="match_parent"

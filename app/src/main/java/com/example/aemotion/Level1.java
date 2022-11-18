@@ -21,8 +21,6 @@ import java.util.List;
 public class Level1 extends AppCompatActivity {
 
     int CheckON2;
-
-
     private View decorView;
     private int	uiOption;
 
@@ -45,10 +43,10 @@ public class Level1 extends AppCompatActivity {
        /*final Animation front = AnimationUtils.loadAnimation(this, R.anim.front_animator);
        final Animation back = AnimationUtils.loadAnimation(this,R.anim.back_animator);*/
 
-       TextView image_1 = findViewById(R.id.image_1);
-       TextView image_2 = findViewById(R.id.image_2);
-       TextView image_3 = findViewById(R.id.image_3);
-       TextView image_4 = findViewById(R.id.image_4);
+       Button image_1 = findViewById(R.id.image_1);
+        Button image_2 = findViewById(R.id.image_2);
+        Button image_3 = findViewById(R.id.image_3);
+        Button image_4 = findViewById(R.id.image_4);
 
         Button backbtn = findViewById(R.id.backbtn);
         backbtn.setOnClickListener(new View.OnClickListener() {
