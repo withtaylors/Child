@@ -63,7 +63,7 @@ public class Happy extends AppCompatActivity {
         decorView.setSystemUiVisibility( uiOption );
 
 
-
+        //효과음
         MediaPlayer mediaPlayer;
         MediaPlayer mediaPlayer2;
         mediaPlayer = MediaPlayer.create(this, R.raw.say);
@@ -75,14 +75,8 @@ public class Happy extends AppCompatActivity {
             }
         }, 3000);
 
-
         mediaPlayer2 = MediaPlayer.create(this, R.raw.clap);
         mediaPlayer2.start();
-
-
-
-
-
 
         SharedPreferences sharedPreferences = getSharedPreferences("MY", Context.MODE_PRIVATE );
         ImageView happy = findViewById(R.id.happy);
