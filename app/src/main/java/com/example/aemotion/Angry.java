@@ -15,7 +15,9 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Base64;
 import android.widget.ImageView;
 
@@ -37,6 +39,20 @@ public class Angry extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_angry);
+
+        //효과음
+        MediaPlayer mediaPlayer;
+        MediaPlayer mediaPlayer2;
+        mediaPlayer = MediaPlayer.create(this, R.raw.say);
+
+        Handler mHandler = new Handler();
+        mHandler.postDelayed(new Runnable()  {
+            public void run() {
+                mediaPlayer.start();
+            }
+        }, 3000);
+        mediaPlayer2 = MediaPlayer.create(this, R.raw.clap);
+        mediaPlayer2.start();
 
         SharedPreferences sharedPreferences = getSharedPreferences("MY", Context.MODE_PRIVATE );
         ImageView angry = findViewById(R.id.angry);
