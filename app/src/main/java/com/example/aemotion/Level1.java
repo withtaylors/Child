@@ -72,6 +72,7 @@ public class Level1 extends AppCompatActivity {
                 VO.setCheckON2(CheckON2);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+
                 }
         });
 
@@ -82,6 +83,7 @@ public class Level1 extends AppCompatActivity {
                 VO.setCheckON2(CheckON2);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+
             }
         });
         image_3.setOnClickListener(new View.OnClickListener() {
@@ -91,6 +93,7 @@ public class Level1 extends AppCompatActivity {
                 VO.setCheckON2(CheckON2);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+
             }
         });
         image_4.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +103,7 @@ public class Level1 extends AppCompatActivity {
                 VO.setCheckON2(CheckON2);
                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                 startActivity(intent);
+
 
             }
         });

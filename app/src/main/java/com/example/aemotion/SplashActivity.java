@@ -20,6 +20,7 @@ public class SplashActivity extends AppCompatActivity {
     Animation anim_FadeIn;
     Animation anim_ball;
 
+
     private View decorView;
     private int	uiOption;
 
@@ -46,6 +47,7 @@ public class SplashActivity extends AppCompatActivity {
         anim_FadeIn = AnimationUtils.loadAnimation(this, R.anim.anim_splash_fade);
         anim_ball = AnimationUtils.loadAnimation(this,R.anim.anim_splash_ball);
 
+
         anim_FadeIn.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
@@ -54,7 +56,10 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
+
                 startActivity(new Intent(SplashActivity.this, Home.class));
+                overridePendingTransition(R.anim.fade_in, R.anim.none);
+
             }
 
             @Override
