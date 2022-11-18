@@ -15,8 +15,10 @@ import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Base64;
+import android.view.View;
 import android.widget.ImageView;
 
 import java.util.concurrent.TimeUnit;
@@ -32,11 +34,24 @@ import nl.dionsegijn.konfetti.xml.KonfettiView;
 public class Angry extends AppCompatActivity {
     private KonfettiView konfettiView = null;
     private Shape.DrawableShape drawableShape = null;
+    private View decorView;
+    private int	uiOption;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_angry);
+
+        decorView = getWindow().getDecorView();
+        uiOption = getWindow().getDecorView().getSystemUiVisibility();
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH )
+            uiOption |= View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN )
+            uiOption |= View.SYSTEM_UI_FLAG_FULLSCREEN;
+        if( Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT )
+            uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
+
+        decorView.setSystemUiVisibility( uiOption );
 
         SharedPreferences sharedPreferences = getSharedPreferences("MY", Context.MODE_PRIVATE );
         ImageView angry = findViewById(R.id.angry);
@@ -45,8 +60,8 @@ public class Angry extends AppCompatActivity {
         byte[] encodeByte = Base64.decode(temp1, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
 
-        Bitmap a = getRoundedCroppedBitmap(bitmap);
-        angry.setImageBitmap(a);
+        //Bitmap a = getRoundedCroppedBitmap(bitmap);
+        angry.setImageBitmap(bitmap);
 
         final Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), R.drawable.ic_heart);
         Shape.DrawableShape drawableShape = new Shape.DrawableShape(drawable, true);
