@@ -5,6 +5,7 @@ import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,6 +20,8 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Base64;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import java.util.concurrent.TimeUnit;
@@ -79,6 +82,24 @@ public class Angry extends AppCompatActivity {
                 .position(0.0, 0.0, 1.0, 0.0)
                 .build();
         konfettiView.start(party);
+
+        Button back = findViewById(R.id.back);
+        Button home = findViewById(R.id.home);
+
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Angry.this, Level3.class);
+                startActivity(intent);
+            }
+        });
+        home.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Angry.this, Home.class);
+                startActivity(intent);
+            }
+        });
     }
 
     //사진 동그라미 테두리로 나오게하는 코드
