@@ -17,7 +17,7 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
 
-    <color name="text_color">#000000</color>
+    <color name="text_color">#5E5E5E</color>
     <color name="text_transparent">#00000000</color>
 
     <color name="card_view_background">#D1E9E2</color>
@@ -26,7 +26,6 @@
     <color name="light_orange">#FFF4E3</color>
     <color name="correct_green">#91E648</color>
     <color name="uncorrect_red">#F54040</color>
-
 
     <color name="pinky">#FF7EB3</color>
     <color name="next">#EB679D</color>

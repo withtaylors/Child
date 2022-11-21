@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog"
+    android:layout_width="315dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_bg"
+    android:orientation="vertical"
+    tools:context=".Copyright">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="0dp"
+        android:background="@drawable/btn_pressing"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/dialog_bg2"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_gravity="center"
+                android:layout_width="200dp"
+                android:layout_height="70dp"
+                android:layout_marginHorizontal="10dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/aemotion" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/font"
+                android:gravity="center"
+                android:text=":자폐아를 위한 표정 훈련 앱"
+                android:textSize="13sp"
+                android:textColor="@color/text_color" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginVertical="8dp"
+                android:fontFamily="@font/font"
+                android:gravity="center"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:text="보호자분들은 아이의 동기부여를 위해 \n적절한 칭찬과 보상을 해주세요!"
+                android:textColor="@color/pinky" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="15dp"
+                android:fontFamily="@font/font"
+                android:gravity="center"
+                android:text="아래는 저작권을 표시한 것이며\n 해당 텍스트 클릭시 원본 아이콘 페이지로 이동함"
+                android:textColor="@color/gray"
+                android:textSize="11sp"/>
+            <Button
+                android:id="@+id/cottoncandy"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/font"
+                android:text="Cotton candy icons created by Freepik - Flaticon"
+                android:textColor="@color/gray"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/f1"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/font"
+                android:text="Feelings icons created by Freepik - Flaticon"
+                android:textColor="@color/gray"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/f2"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/font"
+                android:text="Crying baby icons created by Freepik - Flaticon"
+                android:textColor="@color/gray"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/f3"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/font"
+                android:text="Surprise icons created by Freepik - Flaticon"
+                android:textColor="@color/gray"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/f4"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/font"
+                android:text="Anger icons created by Freepik - Flaticon"
+                android:textColor="@color/gray"
+                android:textSize="10sp" />
+
+            <Button
+                android:id="@+id/trophy"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_gravity="center"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/font"
+                android:text="Best seller icons created by Freepik - Flaticon"
+                android:textColor="@color/gray"
+                android:textSize="10sp" />
+        </LinearLayout>
+        <Button
+            android:id="@+id/choose_button"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:background="@drawable/button_background"
+            android:fontFamily="@font/font"
+            android:padding="10dp"
+            android:text="확인"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>

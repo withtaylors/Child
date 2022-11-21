@@ -1,7 +1,7 @@
 package com.example.aemotion;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -17,7 +17,7 @@ import com.airbnb.lottie.LottieAnimationView;
 
 
 public class Home extends AppCompatActivity {
-    private View 	decorView;
+    private View decorView;
     private int	uiOption;
 
     @Override
@@ -35,6 +35,15 @@ public class Home extends AppCompatActivity {
             uiOption |= View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY;
 
         decorView.setSystemUiVisibility( uiOption );
+
+        Button crbtn = (Button)findViewById(R.id.crbtn);
+        crbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Home.this, Copyright.class);
+                startActivity(intent);
+            }
+        });
 
         final Animation animation = AnimationUtils.loadAnimation(this, R.anim.bounce);
 
