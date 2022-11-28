@@ -9,15 +9,15 @@
 
     <ImageView
         android:id="@+id/surprise"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:adjustViewBounds="true"
-        android:layout_marginLeft="63dp"
-        android:layout_marginTop="225dp" />
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="260dp" />
     <ImageView
         android:id="@+id/surprise2"
-        android:layout_width="wrap_content"
-        android:layout_height = "400dp"
+        android:layout_width="match_parent"
+        android:layout_height = "450dp"
         android:adjustViewBounds="true"
         android:layout_marginTop="150dp"
         android:background="@drawable/surprised_b"

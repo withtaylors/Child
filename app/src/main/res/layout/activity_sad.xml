@@ -9,16 +9,16 @@
 
     <ImageView
         android:id="@+id/sad"
-        android:layout_width="290dp"
+        android:layout_width="210dp"
         android:adjustViewBounds="true"
-        android:layout_height="200dp"
+        android:layout_height="180dp"
         android:scaleType="fitXY"
-        android:layout_marginLeft="55dp"
-        android:layout_marginTop="278dp" />
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="220dp" />
     <ImageView
         android:id="@+id/sad2"
         android:layout_width="match_parent"
-        android:layout_height = "400dp"
+        android:layout_height = "450dp"
         android:adjustViewBounds="true"
         android:layout_marginTop="150dp"
         android:background="@drawable/sad_b"

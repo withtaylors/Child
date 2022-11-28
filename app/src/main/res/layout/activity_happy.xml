@@ -9,15 +9,15 @@
 
     <ImageView
         android:id="@+id/happy"
-        android:layout_width="260dp"
-        android:layout_height="260dp"
+        android:layout_width="60dp"
+        android:layout_height="50dp"
         android:adjustViewBounds="true"
-        android:layout_marginLeft="60dp"
-        android:layout_marginTop="185dp" />
+        android:layout_marginLeft="155dp"
+        android:layout_marginTop="310dp" />
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="450dp"
         android:adjustViewBounds="true"
         android:layout_marginTop="150dp"
         android:background="@drawable/happy_b"
