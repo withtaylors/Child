@@ -54,16 +54,16 @@ public class Expic extends AppCompatActivity {
 
         CheckON = VO.getCheckON();
         if(CheckON == 1){
-            layoutback.setImageResource(R.drawable.happy_s);
+            layoutback.setBackgroundResource(R.drawable.happy_s);
         }
         else if(CheckON == 2){
-            layoutback.setImageResource(R.drawable.sad_s);
+            layoutback.setBackgroundResource(R.drawable.sad_s);
         }
         else if(CheckON == 3){
-            layoutback.setImageResource(R.drawable.surprised_s);
+            layoutback.setBackgroundResource(R.drawable.surprised_s);
         }
         else{
-            layoutback.setImageResource(R.drawable.angry_s);
+            layoutback.setBackgroundResource(R.drawable.angry_s);
         }
 
         new Handler().postDelayed(new Runnable() {
