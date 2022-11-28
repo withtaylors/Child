@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.graphics.Color;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -24,6 +25,10 @@ public class Home extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //bgm 실행하기
+        Intent intent = new Intent(getApplicationContext(), MusicService.class);
+        startService(intent);
 
         decorView = getWindow().getDecorView();
         uiOption = getWindow().getDecorView().getSystemUiVisibility();

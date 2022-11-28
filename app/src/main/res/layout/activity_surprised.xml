@@ -7,6 +7,16 @@
     android:background="@color/white"
     tools:context=".Surprised">
 
+    <TextView
+        android:id="@+id/h_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="70dp"
+        android:text="잘했어요! 정말 훌륭해요"
+        android:textSize="20sp"
+        android:textAlignment="center"
+        android:fontFamily="@font/font"
+        android:textColor="@color/next"/>
     <ImageView
         android:id="@+id/surprise"
         android:layout_width="250dp"

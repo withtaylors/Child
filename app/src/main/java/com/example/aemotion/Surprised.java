@@ -36,6 +36,7 @@ import nl.dionsegijn.konfetti.xml.KonfettiView;
 public class Surprised extends AppCompatActivity {
     private KonfettiView konfettiView = null;
     private Shape.DrawableShape drawableShape = null;
+    MediaPlayer mediaPlayer2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,16 +44,6 @@ public class Surprised extends AppCompatActivity {
         setContentView(R.layout.activity_surprised);
 
         //효과음
-        MediaPlayer mediaPlayer;
-        MediaPlayer mediaPlayer2;
-        mediaPlayer = MediaPlayer.create(this, R.raw.say);
-
-        Handler mHandler = new Handler();
-        mHandler.postDelayed(new Runnable()  {
-            public void run() {
-                mediaPlayer.start();
-            }
-        }, 3000);
         mediaPlayer2 = MediaPlayer.create(this, R.raw.clap);
         mediaPlayer2.start();
 
@@ -62,9 +53,7 @@ public class Surprised extends AppCompatActivity {
         String temp1 = sharedPreferences.getString("image", " ");
         byte[] encodeByte = Base64.decode(temp1, Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(encodeByte, 0, encodeByte.length);
-
-        Bitmap a = getRoundedCroppedBitmap(bitmap);
-        surprise.setImageBitmap(a);
+        surprise.setImageBitmap(bitmap);
 
         final Drawable drawable = ContextCompat.getDrawable(getApplicationContext(), android.R.drawable.btn_star);
         Shape.DrawableShape drawableShape = new Shape.DrawableShape(drawable, true);
@@ -101,26 +90,14 @@ public class Surprised extends AppCompatActivity {
         });
     }
 
-    //사진 동그라미 테두리로 나오게하는 코드
-    private Bitmap getRoundedCroppedBitmap(Bitmap image) {
-        int widthLight = image.getWidth();
-        int heightLight = image.getHeight();
-
-        Bitmap output = Bitmap.createBitmap(image.getWidth(), image.getHeight(),
-                Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(output);
-        Paint paintColor = new Paint();
-        paintColor.setFlags(Paint.ANTI_ALIAS_FLAG);
-
-        RectF rectF = new RectF(new Rect(0, 0, widthLight, heightLight));
-
-        canvas.drawRoundRect(rectF, widthLight / 2, heightLight / 2, paintColor);
-
-        Paint paintImage = new Paint();
-        paintImage.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_ATOP));
-        canvas.drawBitmap(image, 0, 0, paintImage);
-
-        return output;
+    // MediaPlayer는 시스템 리소스를 잡아먹는다.
+    // MediaPlayer는 필요이상으로 사용하지 않도록 주의해야 한다.
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if(mediaPlayer2 != null) {
+            mediaPlayer2.release();
+            mediaPlayer2 = null;
+        }
     }
 }

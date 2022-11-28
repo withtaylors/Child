@@ -80,7 +80,5 @@ public class Copyright extends Activity {
                 startActivity(intent);
             }
         });
-    }
-
-
+}
 }
