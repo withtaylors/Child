@@ -23,7 +23,7 @@
         android:adjustViewBounds="true"
         android:layout_height="180dp"
         android:scaleType="fitXY"
-        android:layout_marginLeft="160dp"
+        android:layout_marginLeft="140dp"
         android:layout_marginTop="220dp" />
     <ImageView
         android:id="@+id/sad2"

@@ -22,7 +22,7 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:adjustViewBounds="true"
-        android:layout_marginLeft="160dp"
+        android:layout_marginLeft="140dp"
         android:layout_marginTop="260dp" />
     <ImageView
         android:id="@+id/surprise2"

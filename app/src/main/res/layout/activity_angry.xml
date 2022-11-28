@@ -19,11 +19,11 @@
         android:textColor="@color/next"/>
     <ImageView
         android:id="@+id/angry"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+        android:layout_width="110dp"
+        android:layout_height="90dp"
         android:adjustViewBounds="true"
-        android:layout_marginLeft="200dp"
-        android:layout_marginTop="240dp" />
+        android:layout_marginLeft="190dp"
+        android:layout_marginTop="275dp" />
     <ImageView
         android:id="@+id/angry2"
         android:layout_width="wrap_content"
