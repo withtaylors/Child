@@ -221,8 +221,8 @@ public class Camera extends AppCompatActivity {
             String[] classes = {"happy", "sad", "surprise", "angry"};
 
             System.out.println(confidences);
-            //next.setVisibility(View.INVISIBLE);
-            next.setVisibility(View.VISIBLE);
+            next.setVisibility(View.INVISIBLE);
+            //next.setVisibility(View.VISIBLE);
 
             MediaPlayer mediaPlayer2;
             mediaPlayer2 = MediaPlayer.create(this, R.raw.uhh);
